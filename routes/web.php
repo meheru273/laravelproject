@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,7 @@ Route::get('/', function () {
 });
 
 Route::get('/',[AppController::class,'index'])->name('app.index');
+Route::get('/shop',[ShopController::class,'index'])->name('shop.index');
 
 Route::middleware('auth')->group(function(){
     Route::get('/my-account',[UserController::class,'index'])->name('user.index');
@@ -24,6 +26,8 @@ Route::middleware('auth')->group(function(){
 Route::middleware(['auth',\App\Http\Middleware\AuthAdmin::class])->group(function(){
     Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
 });
+
+
 
 Auth::routes();
 
