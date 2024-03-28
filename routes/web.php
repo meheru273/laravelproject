@@ -18,6 +18,8 @@ Route::get('/', function () {
 
 Route::get('/',[AppController::class,'index'])->name('app.index');
 Route::get('/shop',[ShopController::class,'index'])->name('shop.index');
+Route::get('/product/{slug}',[ShopController::class,'productDetails'])->name('shop.product.details');
+
 
 Route::middleware('auth')->group(function(){
     Route::get('/my-account',[UserController::class,'index'])->name('user.index');

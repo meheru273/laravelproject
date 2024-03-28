@@ -24,7 +24,6 @@ return new class extends Migration
             $table->boolean('featured')->default(false);
             $table->unsignedInteger('quantity')->default(1);
             $table->string('image');
-            $table->string('image');
             $table->text('images');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id');
