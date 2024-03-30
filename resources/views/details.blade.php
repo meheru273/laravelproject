@@ -199,7 +199,7 @@
                                         <i class="fa fa-bookmark fz-16 me-2"></i>
                                         <span>Wishlist</span>
                                     </a>
-                                    <a href="javascript:void(0)"  id="cartEffect" class="btn btn-solid hover-solid btn-animation">
+                                    <a href="{{route('add-cart',['slug'=>$product->slug])}}"  id="cartEffect" class="btn btn-solid hover-solid btn-animation">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span>Add To Cart</span>                                       
                                     </a>
