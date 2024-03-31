@@ -34,6 +34,10 @@ Route::middleware([\App\Http\Middleware\Authenticate::class,\App\Http\Middleware
 });
 
 
+
+Route::post('/products',[AdminController::class,'store'])->name('products.store');
+Route::get('/list',[AdminController::class,'showlist'])->name('show.list');
+
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

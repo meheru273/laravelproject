@@ -16,25 +16,23 @@ class ProductFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
-        $product_name=$this->faker->unique()->words($nb=2,$asText=true);
-        $slug=Str::slug($product_name);
-        $image_name =$this->faker->numberBetween(1,24).'.jpg';
-        return [
-            'name'=>Str::title($product_name),
-            'slug'=>$slug,
-            'short_description'=>$this->faker->text(200),
-            'description'=>$this->faker->text(500),
-            'regular_price'=>$this->faker->numberBetween(1,22),
-            'SKU'=>$this->faker->numberBetween(100,500),
-            'stock_status' => $this->faker->randomElement(['instock', 'outofstock']),
-            'quantity'=>$this->faker->numberBetween(100,200),
-            'image'=>$image_name,
-            'images'=>$image_name,
-            'category_id'=>$this->faker->numberBetween(1,6),
-            'brand_id'=>$this->faker->numberBetween(1,6),
-
-
-        ];
-    }
+{
+    $prduct_name = $this->faker->unique()->words($nb=2,$asText = true);
+    $slug = Str::slug($prduct_name);
+    $image_name =$this->faker->numberBetween(1,24).'.jpg';
+    return [
+        'name' => Str::title($prduct_name),
+        'slug' => $slug,
+        'short_description' => $this->faker->text(200),
+        'description' => $this->faker->text(500),
+        'regular_price' => $this->faker->numberBetween(1,22),
+        'SKU' => 'SMD'.$this->faker->numberBetween(100,500),
+        'stock_status' => 'instock',
+        'quantity' => $this->faker->numberBetween(100,200),
+        'image' => $image_name,
+        'images' => $image_name,
+        'category_id' => $this->faker->numberBetween(1,6),
+        'brand_id' => $this->faker->numberBetween(1,6)
+    ];
+}
 }
