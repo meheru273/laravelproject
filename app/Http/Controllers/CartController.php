@@ -15,16 +15,25 @@ class CartController extends Controller
     
  }
 
- public function addToCart($slug,Cart $cart)
+ public function addToCart($slug)
  {
     $product = Product::where('slug',$slug)->first();
 
-    $cartItem = new Cart();
-    $cartItem->id = $product->id;
-    $cartItem->name = $product->name;
-    $cartItem->price = $product->sale_price;
-    $cartItem->quantity = 1; // Assuming initial quantity is 1
-    
+    if ($product) {
+        $cart = new Cart();
+        $cart->name = $product->name;
+        $cart->slug = $product->slug;
+        
+        // Check if the product has a sale price, if not, use regular price
+        if ($product->sale_price) {
+            $cart->price = $product->sale_price;
+        } else {
+            $cart->price = $product->regular_price;
+        }
+        
+        $cart->quantity = 1; 
+        $cart->save();
+    }
     return view('cart',['product'=>$product,]);
 
  }

@@ -9,7 +9,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $products=Product::orderBy('created_at','DESC')->paginate(12);
+        $products=Product::orderBy('created_at','DESC')->paginate(5);
         return view('shop',['products'=>$products]);
     }
     public function productDetails($slug)

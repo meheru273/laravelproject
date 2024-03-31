@@ -25,14 +25,13 @@ Route::get('/cart',[CartController::class,'cart'])->name('cart');
 Route::get('add-to-cart/{slug}',[CartController::class,'addToCart'])->name('add-cart');
 Route::get('/remove/{slug}',[CartController::class,'remove'])->name('remove');
 
-Route::middleware('auth')->group(function(){
+Route::middleware(\App\Http\Middleware\Authenticate::class)->group(function(){
     Route::get('/my-account',[UserController::class,'index'])->name('user.index');
 });
 
-Route::middleware(['auth',\App\Http\Middleware\AuthAdmin::class])->group(function(){
+Route::middleware([\App\Http\Middleware\Authenticate::class,\App\Http\Middleware\AuthAdmin::class])->group(function(){
     Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
 });
-
 
 
 Auth::routes();
