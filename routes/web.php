@@ -37,7 +37,9 @@ Route::middleware([\App\Http\Middleware\Authenticate::class,\App\Http\Middleware
 
 Route::post('/products',[AdminController::class,'store'])->name('products.store');
 Route::get('/list',[AdminController::class,'showlist'])->name('show.list');
-
+Route::get('/edit/{product}',[AdminController::class,'edit'])->name('admin.edit');
+Route::put('/update/{product}',[AdminController::class,'update'])->name('admin.update');
+Route::delete('/delete/{product}',[AdminController::class,'delete'])->name('admin.delete');
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#e87316">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Surfside Media">
+    <meta name="apple-mobile-web-app-title" content="">
     <meta name="msapplication-TileImage" content="{{asset('assets/images/favicon.ico')}}">
 
 
@@ -279,22 +279,16 @@
                 <div class="row gy-4">
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="footer-contact">
-                            <div class="brand-logo">
-                                <a href="index.htm" class="footer-logo float-start">
-                                    <img src="{{asset('assets/images/logo.png" class="f-logo img-fluid blur-up lazyload')}}"
-                                        alt="logo">
-                                </a>
-                            </div>
                             <ul class="contact-lists" style="clear:both;">
                                 <li>
-                                    <span><b>phone:</b> <span class="font-light"> +1 0000000000</span></span>
+                                    <span><b>phone:</b> <span class="font-light"> +880 000000000</span></span>
                                 </li>
                                 <li>
-                                    <span><b>Address:</b><span class="font-light"> NIT, Faridabad, Haryana,
-                                            India</span></span>
+                                    <span><b>Address:</b><span class="font-light"> KUET,Bangladesh
+                                            </span></span>
                                 </li>
                                 <li>
-                                    <span><b>Email:</b><span class="font-light"> contact@surfsidemedia.in</span></span>
+                                    <span><b>Email:</b><span class="font-light"> meheru@gmail.com</span></span>
                                 </li>
                             </ul>
                         </div>
@@ -320,32 +314,6 @@
                                     </li>
                                     <li>
                                         <a href="contact-us.html" class="font-dark">Contact</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                        <div class="footer-links">
-                            <div class="footer-title">
-                                <h3>New Categories</h3>
-                            </div>
-                            <div class="footer-content">
-                                <ul>
-                                    <li>
-                                        <a href="shop.html" class="font-dark">Latest Shoes</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html" class="font-dark">Branded Jeans</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html" class="font-dark">New Jackets</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html" class="font-dark">Colorfull Hoodies</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html" class="font-dark">Shiner Goggles</a>
                                     </li>
                                 </ul>
                             </div>
@@ -425,9 +393,6 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="mb-0 font-dark">© 2023, Surfside Media.</p>
                     </div>
                 </div>
             </div>

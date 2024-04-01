@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
+use Illuminate\Support\Facades\File;
+
 
 class AdminController extends Controller
 {
@@ -17,10 +19,11 @@ class AdminController extends Controller
 
     public function showlist()
     {
-        return view('admin.list');
-    }
-    public function create()
-    {
+        $products= Category::orderBy('created_at','DESC')->get();
+
+        return view('admin.list',[
+            'products'=>$products
+        ]);
 
     }
     public function store(Request $request)
@@ -36,7 +39,7 @@ class AdminController extends Controller
 
             // 'sale_price' => 'nullable|numeric|min:0|lt:regular_price',
             // 'SKU' => 'required|string|min:3',
-            'image' => 'required|string|max:255',
+            'image' => 'required',
             // 'images' => 'string',
             // 'category_id' => 'required|integer',
             // 'brand_id' => 'required|integer'
@@ -49,7 +52,6 @@ class AdminController extends Controller
         
         $validator = Validator::make($request->all(), $rules);
 
-
         if($validator->fails())
         {
             return redirect()->back()->withInput()->withErrors($validator);
@@ -58,14 +60,14 @@ class AdminController extends Controller
         $category = new Category;
         $category->name=$request->name;
         $category->slug = $request->slug;
-        $category->image= $request->image;
+        // $category->image= $request->image;
         $category->save();
 
         $brand = new Brand;
         $brand->name=$request->name;
         $brand->slug = $request->slug;
-        $brand->image= $request->image;
-        $category->save();
+        // $brand->image= $request->image;
+        $brand->save();
 
         // $product = new Product();
         // $product->name = $request->name;
@@ -79,22 +81,87 @@ class AdminController extends Controller
         // $product->category_id= $request->category_id;
         // $product->brand_id = $request->brand_id;
 
-        
+        if($request->image !="")
+        {
+            $image= $request->image;
+            $ext = $image->getClientOriginalExtension();
+            $imageName= time().'.'.$ext;
+
+            $image->move(public_path('assets/images/fashion/product/front'),$imageName);
+            $category->image = $imageName; 
+            $brand->image = $imageName; 
+            $category->save();
+            $brand->save();
+        }
 
       return redirect()->route('show.list')->with('success','product added successfully');
 
-        
-
-        
     }
 
-    public function update()
+    public function edit($id)
     {
+        $product =Category::findOrFail($id);
+        // $brand=Brand::findOrFail($id);
 
+        return view('admin.edit',[
+            'product' => $product,
+            
+        ]);
     }
 
-    public function delete()
+    public function update($id,Request $request)
     {
+        $category =Category::findOrFail($id);
+        // $brand =Brand::find($category);
+
+        $rules = [
+            'name' => 'required|string|min:5|max:255',
+            'slug' => 'required|string|min:5',
+            'image' => 'required',];
+
+            $validator = Validator::make($request->all(), $rules);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withInput()->withErrors($validator);
+            }
+           
+            $category->name=$request->name;
+            $category->slug = $request->slug; 
+            $category->save();
+
+            // $brand->name=$category->name;
+            // $brand->slug = $category->slug;
+            // $brand->save();
+
+
+
+
+            if($request->image !="")
+        {
+            File::delete(public_path('assets/images/fashion/product/front'.$category->image));
+            $image= $request->image;
+            $ext = $image->getClientOriginalExtension();
+            $imageName= time().'.'.$ext;
+
+            $image->move(public_path('assets/images/fashion/product/front'),$imageName);
+            $category->image = $imageName; 
+            // $brand->image = $imageName; 
+            $category->save();
+            //  $brand->save();
+        }
+
+      return redirect()->route('show.list')->with('success','product updated successfully');
+        
+    }
+    public function delete($id)
+    {
+
+        $category= Category::findOrFail($id);
+        File::delete(public_path('assets/images/fashion/product/front'.$category->image));
+
+        $category->delete();
+        return redirect()->route('show.list')->with('success','product deleted successfully');
 
     }
 }
