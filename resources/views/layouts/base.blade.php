@@ -37,8 +37,7 @@
     <link id="color-link" rel="stylesheet" type="text/css" href="{{ asset('assets/css/demo4.css') }}">
 
 
-    <style>
-')}}        .h-logo {
+    <style>      .h-logo {
             max-width: 185px !important;
         }
 

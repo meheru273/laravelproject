@@ -10,22 +10,18 @@ use App\Models\Brand;
 use Illuminate\Support\Facades\File;
 
 
-class AdminController extends Controller
+class CategoryController extends Controller
 {
-    public function index()
-    {
-        return view('admin.index');
-    }
 
-    public function create()
+    public function bcreate()
     {
-        return view('admin.show.product');
+        return view ('admin.show.bedit');
     }
     public function showlist()
     {
         $products= Category::orderBy('created_at','DESC')->get();
 
-        return view('admin.show.plist',[
+        return view('admin.show.clist',[
             'products'=>$products
         ]);
 
@@ -37,20 +33,7 @@ class AdminController extends Controller
         $rules = [
             'name' => 'required|string|min:5|max:255',
             'slug' => 'required|string|min:5',
-            // 'short_description' => 'required|string',
-            // 'description' => 'required|string',
-            // 'regular_price' => 'required|numeric|min:1',
-
-            // 'sale_price' => 'nullable|numeric|min:0|lt:regular_price',
-            // 'SKU' => 'required|string|min:3',
             'image' => 'required',
-            // 'images' => 'string',
-            // 'category_id' => 'required|integer',
-            // 'brand_id' => 'required|integer'
-
-            // 'stock_status' => 'required|in:instock,outofstock',
-            // 'featured' => 'boolean',
-            // 'quantity' => 'integer|min:0',
             
         ];
         
@@ -64,27 +47,9 @@ class AdminController extends Controller
         $category = new Category;
         $category->name=$request->name;
         $category->slug = $request->slug;
-        // $category->image= $request->image;
         $category->save();
 
-        $brand = new Brand;
-        $brand->name=$request->name;
-        $brand->slug = $request->slug;
-        // $brand->image= $request->image;
-        $brand->save();
-
-        // $product = new Product();
-        // $product->name = $request->name;
-        // $product->slug = $request->slug;  
-        // $product->short_description = $request->short_description;
-        // $product->description = $request->description;
-        // $product->regular_price = $request->regular_price;
-        // $product->SKU = $request->SKU;
-        // $product->image= $request->image;
-        // $product->images= $request->images;
-        // $product->category_id= $request->category_id;
-        // $product->brand_id = $request->brand_id;
-
+       
         if($request->image !="")
         {
             $image= $request->image;
@@ -93,21 +58,18 @@ class AdminController extends Controller
 
             $image->move(public_path('assets/images/fashion/product/front'),$imageName);
             $category->image = $imageName; 
-            $brand->image = $imageName; 
             $category->save();
-            $brand->save();
         }
 
-      return redirect()->route('show.plist')->with('success','product added successfully');
+      return redirect()->route('show.clist')->with('success','product added successfully');
 
     }
 
     public function edit($id)
     {
         $product =Category::findOrFail($id);
-        // $brand=Brand::findOrFail($id);
 
-        return view('admin.show.pedit',[
+        return view('admin.show.cedit',[
             'product' => $product,
             
         ]);
@@ -116,7 +78,6 @@ class AdminController extends Controller
     public function update($id,Request $request)
     {
         $category =Category::findOrFail($id);
-        // $brand =Brand::find($category);
 
         $rules = [
             'name' => 'required|string|min:5|max:255',
@@ -134,13 +95,6 @@ class AdminController extends Controller
             $category->slug = $request->slug; 
             $category->save();
 
-            // $brand->name=$category->name;
-            // $brand->slug = $category->slug;
-            // $brand->save();
-
-
-
-
             if($request->image !="")
         {
             File::delete(public_path('assets/images/fashion/product/front'.$category->image));
@@ -150,12 +104,10 @@ class AdminController extends Controller
 
             $image->move(public_path('assets/images/fashion/product/front'),$imageName);
             $category->image = $imageName; 
-            // $brand->image = $imageName; 
             $category->save();
-            //  $brand->save();
         }
 
-      return redirect()->route('show.plist')->with('success','product updated successfully');
+      return redirect()->route('show.clist')->with('success','product updated successfully');
         
     }
  public function destroy($id)

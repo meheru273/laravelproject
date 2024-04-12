@@ -1,12 +1,18 @@
-@extends('layouts.base')
-@section('content')
+@extends('layouts.app')
+@include('admin.css')
+@include('admin.sidebar')
+<div class="main-panel">
 <div class="bg-dark py-3">
     <h3 class="text-white text-center">Admin Panel</h3>
 </div>
+<div class="bg-dark py-3">
+    <h3 class="text-white text-center">Product</h3>
+</div>
+
 
 <div class="container">
             <div class="card-header d-flex justify-content-between align-items-center">
-                    <a href="{{ route('show.list') }}" class="btn btn-dark">Back</a> 
+                    <a href="{{ route('show.plist') }}" class="btn btn-dark">Back</a> 
             </div> 
 </div>
     <div class="row d-flex justify-content-center">
@@ -53,4 +59,5 @@
     </div>
 </div>
 
-@endsection
+@include('admin.script')
+</div>

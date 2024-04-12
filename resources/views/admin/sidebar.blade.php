@@ -30,21 +30,21 @@
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="{{route('show.plist')}}">
               <i class="nc-icon nc-pin-3"></i>
-              <p>Maps</p>
+              <p>Product</p>
             </a>
           </li>
           <li>
-            <a href="./notifications.html">
+            <a href="{{route('show.clist')}}">
               <i class="nc-icon nc-bell-55"></i>
-              <p>Notifications</p>
+              <p>Category</p>
             </a>
           </li>
           <li>
-            <a href="./user.html">
+            <a href="{{route('show.blist')}}">
               <i class="nc-icon nc-single-02"></i>
-              <p>User Profile</p>
+              <p>Brand</p>
             </a>
           </li>
           <li>
