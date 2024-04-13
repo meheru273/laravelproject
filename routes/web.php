@@ -29,7 +29,8 @@ Route::post('/add_cart/{id}',[ShopController::class,'add_cart'])->name('add_cart
 Route::get('/cart-products',[ShopController::class,'show_cart'])->name('user.cart');
 Route::get('/remove-cart/{id}',[ShopController::class,'remove_cart'])->name('remove_cart');
 Route::get('/cash_order',[ShopController::class,'cash_order'])->name('cash_order');
-
+Route::get('/stripe{totalprice}',[ShopController::class,'stripe'])->name('stripe');
+Route::post('/stripe{totalprice}',[ShopController::class,'stripePost'])->name('stripe.post');
 
 
 

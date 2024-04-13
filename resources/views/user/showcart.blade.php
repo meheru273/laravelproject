@@ -92,8 +92,8 @@
                                 <a href="{{route('cash_order')}}" class="btn btn-solid-default btn fw-bold" >
                                     Cash On DElivery <i class="fas fa-arrow-right ms-1"></i></a>
                                     <span><span> </span></span>
-                                <a href="checkout" class="btn btn-solid-default btn fw-bold">
-                                    Check Out <i class="fas fa-arrow-right ms-1"></i></a>
+                                <a href="{{route('stripe',$totalprice)}}" class="btn btn-solid-default btn fw-bold">
+                                    Pay by Card <i class="fas fa-arrow-right ms-1"></i></a>
                             </div>
                         </div> 
                     </div>
