@@ -60,7 +60,7 @@
                                     </td>
                                     <td>
                                     <td>
-                                        <form action="{{ route('admin.cdelete', $product->id) }}" method="POST">
+                                    <form action="{{ route('admin.cdelete', $product->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>

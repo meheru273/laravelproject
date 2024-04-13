@@ -12,14 +12,13 @@ use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
-
-    public function bcreate()
-    {
-        $product = new Category(); // Create a new Category object
-        return view('admin.show.cedit', compact('product'));
-    }
     
-    public function showlist()
+
+    public function ccreate()
+    {
+        return view('admin.show.category');
+    }
+    public function showcat()
     {
         $products= Category::orderBy('created_at','DESC')->get();
 
@@ -28,44 +27,35 @@ class CategoryController extends Controller
         ]);
 
     }
-    public function store(Request $request)
-    {
-
-
-        $rules = [
-            'name' => 'required|string|min:5|max:255',
-            'slug' => 'required|string|min:5',
-            'image' => 'required',
-            
-        ];
-        
-        $validator = Validator::make($request->all(), $rules);
-
-        if($validator->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
-
-        $category = new Category;
-        $category->name=$request->name;
-        $category->slug = $request->slug;
-        $category->save();
-
-       
-        if($request->image !="")
-        {
-            $image= $request->image;
-            $ext = $image->getClientOriginalExtension();
-            $imageName= time().'.'.$ext;
-
-            $image->move(public_path('assets/images/fashion/product/front'),$imageName);
-            $category->image = $imageName; 
-            $category->save();
-        }
-
-      return redirect()->route('show.clist')->with('success','product added successfully');
-
+    public function storecat(Request $request)
+{
+    $rules = [
+        'name' => 'required|string|min:5|max:255',
+        'slug' => 'required|string|min:5',
+        'image' => 'required|image',  
+    ];
+    
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+        return redirect()->back()->withInput()->withErrors($validator);
     }
+
+    $category = new Category();
+    $category->name = $request->name;
+    $category->slug = $request->slug; 
+
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $ext = $image->getClientOriginalExtension();
+        $imageName = time() . '.' . $ext;
+        $image->move(public_path('assets/images/fashion/product/front'), $imageName);
+        $category->image = $imageName; 
+    }
+
+    $category->save();
+    return redirect()->route('show.clist')->with('success', 'Category added successfully');
+}
+
 
     public function editcat($id)
     {
@@ -79,44 +69,39 @@ class CategoryController extends Controller
 
     public function updatecat($id,Request $request)
     {
-        $product =Category::findOrFail($id);
-
         $rules = [
             'name' => 'required|string|min:5|max:255',
             'slug' => 'required|string|min:5',
-            'image' => 'required',
+            'image' => 'required|image',
+
         ];
+        
+        $validator = Validator::make($request->all(), $rules);
 
-            $validator = Validator::make($request->all(), $rules);
-
-            if($validator->fails())
-            {
-                return redirect()->back()->withInput()->withErrors($validator);
-            }
-           
-            $product->name = $request->name;
-            $product->slug = $request->slug;  
-            $product->save();
-
-            if($request->image !="")
+        if($validator->fails())
         {
-            File::delete(public_path('assets/images/fashion/product/front'.$product->image));
-            $image= $request->image;
-            $ext = $image->getClientOriginalExtension();
-            $imageName= time().'.'.$ext;
-
-            $image->move(public_path('assets/images/fashion/product/front'),$imageName);
-            $product->image = $imageName; 
-            // $brand->image = $imageName; 
-            $product->save();
-            //  $brand->save();
+            return redirect()->back()->withInput()->withErrors($validator);
         }
 
-      return redirect()->route('show.clist',)->with('success','product updated successfully');
-        
-    }
+        $product = new Category();
+        $product->name = $request->name;
+        $product->slug = $request->slug;  
 
-     public function destroy($id)
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+            $imageName = time() . '.' . $ext;
+            $image->move(public_path('assets/images/fashion/product/front'), $imageName);
+            $product->image = $imageName;
+
+        }
+        $product->save();
+        
+
+      return redirect()->route('show.clist')->with('success','product added successfully');
+
+    }
+ public function destroycat($id)
  {
     $category =Category::findOrFail($id);
     File::delete(public_path('assets/images/fashion/product/front'.$category->image));

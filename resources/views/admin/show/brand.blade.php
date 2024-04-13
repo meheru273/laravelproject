@@ -2,11 +2,11 @@
 @include('admin.css')
 @include('admin.sidebar')
 <div class="main-panel">
-<div class="bg-dark py-3">
+<div class="bg-dark py-1">
     <h3 class="text-white text-center">Admin Panel</h3>
 </div>
-<div class="bg-dark py-3">
-    <h3 class="text-white text-center">Product</h3>
+<div class="bg-dark py-1">
+    <h3 class="text-white text-center">Brand</h3>
 </div>
 
 

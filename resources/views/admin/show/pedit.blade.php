@@ -104,22 +104,6 @@
                     </div>
 
                     <!-- Category ID Field -->
-                    <div class="mb-3">
-                        <label for="category_id" class="form-label h5">Category ID</label>
-                        <input value="{{ old('category_id') }}" type="number" class="@error('category_id') is-invalid @enderror form-control-lg form-control" name="category_id" placeholder="Category ID">
-                        @error('category_id')
-                            <p class="invalid-feedback">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Brand ID Field -->
-                    <div class="mb-3">
-                        <label for="brand_id" class="form-label h5">Brand ID</label>
-                        <input value="{{ old('brand_id') }}" type="number" class="@error('brand_id') is-invalid @enderror form-control-lg form-control" name="brand_id" placeholder="Brand ID">
-                        @error('brand_id')
-                            <p class="invalid-feedback">{{ $message }}</p>
-                        @enderror
-                    </div>
 
 
                     <div class="d-grid gap-2">

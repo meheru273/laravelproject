@@ -12,7 +12,13 @@ use Illuminate\Support\Facades\File;
 
 class BrandController extends Controller
 {
-    public function showlist()
+
+
+    public function bcreate()
+    {
+        return view('admin.show.brand');
+    }
+    public function showbrand()
     {
         $products= Brand::orderBy('created_at','DESC')->get();
 
@@ -21,7 +27,7 @@ class BrandController extends Controller
         ]);
 
     }
-    public function store(Request $request)
+    public function storebrand(Request $request)
     {
 
 
@@ -39,12 +45,11 @@ class BrandController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
-        $category = new Brand;
-        $category->name=$request->name;
-        $category->slug = $request->slug;
-        $category->save();
+        $product = new Brand();
+        $product->name = $request->name;
+        $product->slug = $request->slug;  
+        $product->save();
 
-       
         if($request->image !="")
         {
             $image= $request->image;
@@ -52,15 +57,15 @@ class BrandController extends Controller
             $imageName= time().'.'.$ext;
 
             $image->move(public_path('assets/images/fashion/product/front'),$imageName);
-            $category->image = $imageName; 
-            $category->save();
+            $product->image = $imageName; 
+            $product->save();
         }
 
       return redirect()->route('show.blist')->with('success','product added successfully');
 
     }
 
-    public function edit($id)
+    public function editb($id)
     {
         $product =Brand::findOrFail($id);
 
@@ -70,14 +75,15 @@ class BrandController extends Controller
         ]);
     }
 
-    public function update($id,Request $request)
+    public function updateb($id,Request $request)
     {
-        $category =Brand::findOrFail($id);
+        $product =Brand::findOrFail($id);
 
         $rules = [
             'name' => 'required|string|min:5|max:255',
             'slug' => 'required|string|min:5',
-            'image' => 'required',];
+            'image' => 'required',
+];
 
             $validator = Validator::make($request->all(), $rules);
 
@@ -86,26 +92,28 @@ class BrandController extends Controller
                 return redirect()->back()->withInput()->withErrors($validator);
             }
            
-            $category->name=$request->name;
-            $category->slug = $request->slug; 
-            $category->save();
+            $product->name = $request->name;
+            $product->slug = $request->slug;  
+            $product->image= $request->image;
 
             if($request->image !="")
         {
-            File::delete(public_path('assets/images/fashion/product/front'.$category->image));
+            File::delete(public_path('assets/images/fashion/product/front'.$product->image));
             $image= $request->image;
             $ext = $image->getClientOriginalExtension();
             $imageName= time().'.'.$ext;
 
             $image->move(public_path('assets/images/fashion/product/front'),$imageName);
-            $category->image = $imageName; 
-            $category->save();
+            $product->image = $imageName; 
+            // $brand->image = $imageName; 
+            $product->save();
+            //  $brand->save();
         }
 
       return redirect()->route('show.blist')->with('success','product updated successfully');
         
     }
- public function destroy($id)
+ public function destroyb($id)
  {
     $category =Brand::findOrFail($id);
     File::delete(public_path('assets/images/fashion/product/front'.$category->image));

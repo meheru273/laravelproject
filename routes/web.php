@@ -45,20 +45,20 @@ Route::delete('/p-delete/{product}',[AdminController::class,'destroyproduct'])->
 
 
 
-Route::get('/catlist', [CategoryController::class, 'bcreate'])->name('create.category');
-Route::post('/category',[CategoryController::class,'store'])->name('category.store');
-Route::get('/c-list',[CategoryController::class,'showlist'])->name('show.clist');
+Route::get('/catlist', [CategoryController::class, 'ccreate'])->name('create.category');
+Route::post('/category',[CategoryController::class,'storecat'])->name('category.store');
+Route::get('/c-list',[CategoryController::class,'showcat'])->name('show.clist');
 Route::get('/c-edit/{product}', [CategoryController::class, 'editcat'])->name('admin.cedit');
 Route::put('/c-update/{product}',[CategoryController::class,'updatecat'])->name('admin.cupdate');
-Route::delete('/c-delete/{id}',[CategoryController::class,'destroy'])->name('admin.cdelete');
+Route::delete('/c-delete/{id}',[CategoryController::class,'destroycat'])->name('admin.cdelete');
 
 
 Route::get('/brandlist',[BrandController::class,'bcreate'])->name('create.brand');
-Route::post('/brands',[BrandController::class,'store'])->name('brand.store');
-Route::get('/b-list',[BrandController::class,'showlist'])->name('show.blist');
-Route::get('/b-edit/{product}',[BrandController::class,'edit'])->name('admin.bedit');
-Route::put('/b-update/{product}',[BrandController::class,'update'])->name('admin.bupdate');
-Route::delete('/b-delete/{id}',[BrandController::class,'destroy'])->name('admin.bdelete');
+Route::post('/brands',[BrandController::class,'storebrand'])->name('brand.store');
+Route::get('/b-list',[BrandController::class,'showbrand'])->name('show.blist');
+Route::get('/b-edit/{product}',[BrandController::class,'editb'])->name('admin.bedit');
+Route::put('/b-update/{product}',[BrandController::class,'updateb'])->name('admin.bupdate');
+Route::delete('/b-delete/{id}',[BrandController::class,'destroyb'])->name('admin.bdelete');
 
 
 

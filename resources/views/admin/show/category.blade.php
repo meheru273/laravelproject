@@ -12,7 +12,7 @@
 
 <div class="container">
             <div class="card-header d-flex justify-content-between align-items-center">
-                    <a href="{{ route('show.plist') }}" class="btn btn-dark">Back</a> 
+                    <a href="{{ route('show.clist') }}" class="btn btn-dark">Back</a> 
             </div> 
 </div>
     <div class="row d-flex justify-content-center">

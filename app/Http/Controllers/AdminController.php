@@ -45,13 +45,9 @@ class AdminController extends Controller
             'SKU' => 'required|string|min:3',
             'image' => 'required',
             'images' => 'string',
-            'category_id' => 'integer',
-            'brand_id' => 'integer'
+            'category_id' => 'required|exists:categories,id',
+            'brand_id' => 'required|exists:categories,id',
 
-            // 'stock_status' => 'required|in:instock,outofstock',
-            // 'featured' => 'boolean',
-            // 'quantity' => 'integer|min:0',
-            
         ];
         
         $validator = Validator::make($request->all(), $rules);
@@ -70,7 +66,7 @@ class AdminController extends Controller
         $product->SKU = $request->SKU;
         $product->image= $request->image;
         $product->images= $request->images;
-        $product->category_id= $request->category_id;
+        $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
 
         if($request->image !="")
@@ -113,8 +109,7 @@ class AdminController extends Controller
             'SKU' => 'required|string|min:3',
             'image' => 'required',
             'images' => 'string',
-            'category_id' => 'integer',
-            'brand_id' => 'integer'
+
 ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -132,8 +127,6 @@ class AdminController extends Controller
             $product->SKU = $request->SKU;
             $product->image= $request->image;
             $product->images= $request->images;
-            $product->category_id= $request->category_id;
-            $product->brand_id = $request->brand_id;
 
 
 
