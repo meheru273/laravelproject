@@ -40,7 +40,7 @@ Route::get('/delivered/{id}',[OrderController::class,'delivered'])->name('delive
 Route::get('/search',[OrderController::class,'search'])->name('search');
 
 
-
+Route::get('/search_product',[OrderController::class,'searchproduct'])->name('searchproduct');
 
 
 Route::get('/cart',[CartController::class,'cart'])->name('cart');

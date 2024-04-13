@@ -150,12 +150,7 @@
                             </nav>
                             <div class="menu-right">
                                 <ul>
-                                    <li>
-                                        <div class="search-box theme-bg-color">
-                                            <i data-feather="search"></i>
-                                        </div>
-                                    </li>
-                                    <li class="onhover-dropdown wislist-dropdown">
+                                <li class="onhover-dropdown wislist-dropdown">
                                         <div class="cart-media">
                                             <a href="wishlist/list.html">
                                                 <i data-feather="heart"></i>
@@ -175,6 +170,23 @@
                                             </a>
                                         </div>
                                     </li>
+
+
+                                    <li>
+                                    <form action="{{route('searchproduct')}}" method="get" 
+                                    style="display: flex; align-items: center;">
+                                    <input type="text" name="search" placeholder="Search Orders" 
+                                    style="width: 200px; margin-right: 10px;">
+                                    <button type="submit" class="btn btn-solid-default"
+                                     style="display: flex; align-items: center; padding: 8px 12px; font-size: 14px;">
+                                    <i data-feather="search" style="margin-right: 5px;"></i> 
+                                    </button>
+
+                                    </form>
+
+                                    
+                                    </li>
+
                                    <li class="onhover-dropdown">
     <div class="cart-media name-usr">
         @auth <span></span> @endauth <i data-feather="user"></i>

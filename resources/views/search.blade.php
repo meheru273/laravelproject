@@ -4,19 +4,8 @@
 @endpush
 @section('content')
 <section class="breadcrumb-section section-b-space" style="padding-top:20px;padding-bottom:20px;">
-        <ul class="circles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
         <div class="container">
+            @foreach($product as $product)
             <div class="row">
                 <div class="col-12">
                     <h3>{{$product->name}}</h3>
@@ -86,8 +75,6 @@
 
                         <div class="col-md-6">
                             <div class="cloth-details-size">
-                                
-
                                 <div class="details-image-concept">
                                     <h1>{{$product->name}}</h1>
                                 </div>
@@ -140,7 +127,7 @@
                                         </div>
                                         </div>
                                         </form>
-                                        
+                                        @endforeach
                                     </div>
                                 <div class="border-product">
                                     <h6 class="product-title d-block">share it</h6>
