@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
@@ -31,6 +32,14 @@ Route::get('/remove-cart/{id}',[ShopController::class,'remove_cart'])->name('rem
 Route::get('/cash_order',[ShopController::class,'cash_order'])->name('cash_order');
 Route::get('/stripe{totalprice}',[ShopController::class,'stripe'])->name('stripe');
 Route::post('/stripe{totalprice}',[ShopController::class,'stripePost'])->name('stripe.post');
+
+
+Route::get('/order',[OrderController::class,'order'])->name('ordertable');
+
+Route::get('/delivered/{id}',[OrderController::class,'delivered'])->name('delivered');
+Route::get('/search',[OrderController::class,'search'])->name('search');
+
+
 
 
 

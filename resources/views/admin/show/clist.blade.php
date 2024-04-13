@@ -34,8 +34,8 @@
                             <div class="card-header bg-dark">
                                 <h3 class="text-white">Products</h3>
                             </div>
-                            <div class="card-body">
-                                <table class="table">
+                            <div class="container">
+                                <table class="table table-striped table-bordered">
                                     <tr>
                                     <th>ID</th>
                                     <th></th>

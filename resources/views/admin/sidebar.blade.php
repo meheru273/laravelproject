@@ -18,15 +18,15 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="active ">
-            <a href="./dashboard.html">
+            <a href="{{route('admin.index')}}">
               <i class="nc-icon nc-bank"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li>
-            <a href="./icons.html">
+            <a href="{{route('app.index')}}">
               <i class="nc-icon nc-diamond"></i>
-              <p>Icons</p>
+              <p>Home</p>
             </a>
           </li>
           <li>
@@ -48,9 +48,9 @@
             </a>
           </li>
           <li>
-            <a href="./tables.html">
+            <a href="{{route('ordertable')}}">
               <i class="nc-icon nc-tile-56"></i>
-              <p>Table List</p>
+              <p>Orders</p>
             </a>
           </li>
           <li>
