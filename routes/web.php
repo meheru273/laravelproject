@@ -23,6 +23,16 @@ Route::get('/',[AppController::class,'index'])->name('app.index');
 Route::get('/shop',[ShopController::class,'index'])->name('shop.index');
 Route::get('/product/{slug}',[ShopController::class,'productDetails'])->name('shop.product.details');
 
+
+
+Route::post('/add_cart/{id}',[ShopController::class,'add_cart'])->name('add_cart');
+Route::get('/cart-products',[ShopController::class,'show_cart'])->name('user.cart');
+Route::get('/remove-cart/{id}',[ShopController::class,'remove_cart'])->name('remove_cart');
+Route::get('/cash_order',[ShopController::class,'cash_order'])->name('cash_order');
+
+
+
+
 Route::get('/cart',[CartController::class,'cart'])->name('cart');
 Route::get('add-to-cart/{slug}',[CartController::class,'addToCart'])->name('add-cart');
 Route::get('/remove/{slug}',[CartController::class,'remove'])->name('remove');

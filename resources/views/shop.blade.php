@@ -270,23 +270,31 @@
                 </a>
             </div>
             <div class="cart-wrap">
+                <form action="{{route('add_cart',$product->id)}}" method="POST">
+                
+                @csrf
                 <ul>
+                <div>
+                <input type="number" name="quantity" value="1"
+                min="1" style="width: 100px; height:40px; margin-bottom: 20px;">
+                </div>
+                </ul>
+                <ul>
+                <li>
+                    <button type="submit" class="btn btn-solid-default"
+                    action="{{route('shop.product.details',['slug'=>$product->slug])}}">
+                        <i data-feather="shopping-cart"></i>
+                    </button>
+                </li>
+                </form>
                     <li>
-                        <a href="javascript:void(0)" class="addtocart-btn">
-                            <i data-feather="shopping-cart"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i data-feather="eye"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="wishlist">
-                            <i data-feather="heart"></i>
-                        </a>
+                       <a href="{{route('shop.product.details',['slug'=>$product->slug])}}"
+                       class="btn btn-solid-default">
+                       <i data-feather="eye"></i>
+                       </a>
                     </li>
                 </ul>
+                
             </div>
         </div>
         <div class="product-details">
