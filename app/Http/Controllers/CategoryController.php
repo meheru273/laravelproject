@@ -15,8 +15,10 @@ class CategoryController extends Controller
 
     public function bcreate()
     {
-        return view ('admin.show.bedit');
+        $product = new Category(); // Create a new Category object
+        return view('admin.show.cedit', compact('product'));
     }
+    
     public function showlist()
     {
         $products= Category::orderBy('created_at','DESC')->get();
@@ -65,7 +67,7 @@ class CategoryController extends Controller
 
     }
 
-    public function edit($id)
+    public function editcat($id)
     {
         $product =Category::findOrFail($id);
 
@@ -75,14 +77,15 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function update($id,Request $request)
+    public function updatecat($id,Request $request)
     {
-        $category =Category::findOrFail($id);
+        $product =Category::findOrFail($id);
 
         $rules = [
             'name' => 'required|string|min:5|max:255',
             'slug' => 'required|string|min:5',
-            'image' => 'required',];
+            'image' => 'required',
+        ];
 
             $validator = Validator::make($request->all(), $rules);
 
@@ -91,26 +94,29 @@ class CategoryController extends Controller
                 return redirect()->back()->withInput()->withErrors($validator);
             }
            
-            $category->name=$request->name;
-            $category->slug = $request->slug; 
-            $category->save();
+            $product->name = $request->name;
+            $product->slug = $request->slug;  
+            $product->save();
 
             if($request->image !="")
         {
-            File::delete(public_path('assets/images/fashion/product/front'.$category->image));
+            File::delete(public_path('assets/images/fashion/product/front'.$product->image));
             $image= $request->image;
             $ext = $image->getClientOriginalExtension();
             $imageName= time().'.'.$ext;
 
             $image->move(public_path('assets/images/fashion/product/front'),$imageName);
-            $category->image = $imageName; 
-            $category->save();
+            $product->image = $imageName; 
+            // $brand->image = $imageName; 
+            $product->save();
+            //  $brand->save();
         }
 
-      return redirect()->route('show.clist')->with('success','product updated successfully');
+      return redirect()->route('show.clist',)->with('success','product updated successfully');
         
     }
- public function destroy($id)
+
+     public function destroy($id)
  {
     $category =Category::findOrFail($id);
     File::delete(public_path('assets/images/fashion/product/front'.$category->image));

@@ -6,7 +6,7 @@
     <h3 class="text-white text-center">Admin Panel</h3>
 </div>
 <div class="bg-dark py-3">
-    <h3 class="text-white text-center">Product</h3>
+    <h3 class="text-white text-center">Category</h3>
 </div>
 
 

@@ -25,29 +25,102 @@
                     <!-- name -->
                     <div class="mb-3">
                         <label for="name" class="form-label h5">Name</label>
-                        <input value="{{ old('name',$product->name) }}" type="text" class="@error('name') is-invalid @enderror form-control-lg form-control" name="name" placeholder="Name">
+                        <input value="{{ old('name') }}" type="text" class="@error('name') is-invalid @enderror form-control-lg form-control" name="name" placeholder="Name">
                         @error('name')
                             <p class="invalid-feedback">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    <!-- Slug Field -->
                     <div class="mb-3">
                         <label for="slug" class="form-label h5">Slug</label>
-                        <input type="text" value="{{ old('name',$product->slug) }}" class="@error('slug') is-invalid @enderror form-control-lg form-control" id="slug" name="slug" placeholder="Unique slug">
+                        <input value="{{ old('slug') }}" type="text" class="@error('slug') is-invalid @enderror form-control-lg form-control" name="slug" placeholder="Slug">
                         @error('slug')
                             <p class="invalid-feedback">{{ $message }}</p>
                         @enderror
                     </div>
-                    
-                     <div class="mb-3">
-                        <label for="image" class="form-label h5">Image</label>
-                        <input type="file" class="@error('image') is-invalid @enderror form-control-lg form-control" id="image" name="image" placeholder="Image URL">
-                        @error('image')
-                        <p class="invalid-feedback">{{ $message }}</p>
+
+                    <!-- Short Description Field -->
+                    <div class="mb-3">
+                        <label for="short_description" class="form-label h5">Short Description</label>
+                        <textarea class="@error('short_description') is-invalid @enderror form-control-lg form-control" name="short_description" placeholder="Short Description">{{ old('short_description') }}</textarea>
+                        @error('short_description')
+                            <p class="invalid-feedback">{{ $message }}</p>
                         @enderror
-                        @if($product->image !="")
-                        <img class="w-50 my-3" src="{{asset('assets/images/fashion/product/front')}}/{{$product->image}}">
-                        @endif
                     </div>
+
+                    <!-- Description Field -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label h5">Description</label>
+                        <textarea class="@error('description') is-invalid @enderror form-control-lg form-control" name="description" placeholder="Description">{{ old('description') }}</textarea>
+                        @error('description')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Regular Price Field -->
+                    <div class="mb-3">
+                        <label for="regular_price" class="form-label h5">Regular Price</label>
+                        <input value="{{ old('regular_price') }}" type="number" class="@error('regular_price') is-invalid @enderror form-control-lg form-control" name="regular_price" placeholder="Regular Price" min="1">
+                        @error('regular_price')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Sale Price Field -->
+                    <div class="mb-3">
+                        <label for="sale_price" class="form-label h5">Sale Price</label>
+                        <input value="{{ old('sale_price') }}" type="number" class="@error('sale_price') is-invalid @enderror form-control-lg form-control" name="sale_price" placeholder="Sale Price" min="0">
+                        @error('sale_price')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- SKU Field -->
+                    <div class="mb-3">
+                        <label for="SKU" class="form-label h5">SKU</label>
+                        <input value="{{ old('SKU') }}" type="text" class="@error('SKU') is-invalid @enderror form-control-lg form-control" name="SKU" placeholder="SKU" min="3">
+                        @error('SKU')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Image Field (File Upload) -->
+                    <div class="mb-3">
+                        <label for="image" class="form-label h5">Image</label>
+                        <input type="file" class="@error('image') is-invalid @enderror form-control-lg form-control" id="image" name="image">
+                        @error('image')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Additional Images Field -->
+                    <div class="mb-3">
+                        <label for="images" class="form-label h5">Additional Images</label>
+                        <input value="{{ old('images') }}" type="text" class="@error('images') is-invalid @enderror form-control-lg form-control" name="images" placeholder="Additional Images">
+                        @error('images')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Category ID Field -->
+                    <div class="mb-3">
+                        <label for="category_id" class="form-label h5">Category ID</label>
+                        <input value="{{ old('category_id') }}" type="number" class="@error('category_id') is-invalid @enderror form-control-lg form-control" name="category_id" placeholder="Category ID">
+                        @error('category_id')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Brand ID Field -->
+                    <div class="mb-3">
+                        <label for="brand_id" class="form-label h5">Brand ID</label>
+                        <input value="{{ old('brand_id') }}" type="number" class="@error('brand_id') is-invalid @enderror form-control-lg form-control" name="brand_id" placeholder="Brand ID">
+                        @error('brand_id')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                    </div>
+
 
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-dark btn-lg">Update</button>

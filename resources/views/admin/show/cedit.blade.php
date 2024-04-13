@@ -19,9 +19,9 @@
                 <div class="card-header">
                     <h3 class="text-black">Update Product</h3>
                 </div>
-                <form action="{{ route('admin.cupdate',$product->id) }}" method="post" enctype="multipart/form-data">
-                @method('put')
-                @csrf
+                <form action="{{ route('admin.cupdate', ['product' => $product->id]) }}" method="post" enctype="multipart/form-data">
+    @method('put')
+    @csrf
                 <div class="card-body">
                     <!-- Fields already provided -->
                     <!-- name -->

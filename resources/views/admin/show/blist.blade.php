@@ -59,12 +59,13 @@
                                         <a href="{{route('admin.bedit',$product->id)}}" class="btn btn-dark">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="#" onclick="deleteProduct({{ $product->id }})" class="btn btn-danger">Delete</a>
-                                        <form method="post" id="delete-product-form-{{ $product->id }}" action="{{ route('admin.bdelete', $product->id) }}" >
-                                            @csrf
-                                            @method('delete')
+                                    <td>
+                                        <form action="{{ route('admin.pdelete', $product->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                                         </form>
-                                        
+                                    </td>
                                     </td>
                                     </tr>
                                     @endforeach

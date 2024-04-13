@@ -1,15 +1,15 @@
 @include('admin.css')
 @include('admin.sidebar')
 <div class="main-panel">
-<div class="bg-dark py-3" >
+<div class="bg-dark py-1" >
     <h3 class="text-white text-center">Admin Panel</h3>
 </div>
-<div class="bg-dark py-3">
+<div class="bg-dark py-1">
     <h3 class="text-white text-center">Category</h3>
 </div>
         
             <div class="card-header d-flex justify-content-between align-items-center">
-                    <a href="{{ route('admin.index') }}" class="btn btn-dark">Create</a> 
+                    <a href="{{ route('create.category') }}" class="btn btn-dark">Create</a> 
             </div> 
 
 
@@ -56,15 +56,16 @@
                                     <td>{{$product->slug}}</td>
                                     <td>{{\Carbon\Carbon::parse($product->created_at)->format('d M,Y')}}</th>
                                     <td>
-                                        <a href="{{route('admin.pedit',$product->id)}}" class="btn btn-dark">Edit</a>
+                                        <a href="{{route('admin.cedit',$product->id)}}" class="btn btn-dark">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="#" onclick="deleteProduct({{ $product->id }})" class="btn btn-danger">Delete</a>
-                                        <form method="post" id="delete-product-form-{{ $product->id }}" action="{{ route('admin.cdelete', $product->id) }}" >
-                                            @csrf
-                                            @method('delete')
+                                    <td>
+                                        <form action="{{ route('admin.cdelete', $product->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                                         </form>
-                                        
+                                    </td>
                                     </td>
                                     </tr>
                                     @endforeach
@@ -85,13 +86,5 @@
 @include('admin.script')
 
 </div>
-<script>
-   function deleteProduct(id) {
-    if (confirm("Are you sure you want to delete this?")) {
-        var form = document.getElementById("delete-product-form-" + id);
-        console.log("Submitting form for product id:", id);  
-        form.submit();
-    }
-}
-</script>
+
 
