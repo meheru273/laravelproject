@@ -74,8 +74,12 @@ public function add_reply(Request $request)
 public function product_search(Request $request)
 {
     $search_text=$request->search;
-    $products=Product::where('slur','LIKE','%$search_text%')->get();
-    return view('shop',compact('products'));
+    $products=Product::where('name','LIKE',"%$search_text%")
+    ->orWhere('SKU','LIKE',"%$search_text%")
+    ->orWhere('slug','LIKE',"%$search_text%") ->paginate(12);
+    $comment=Comment::all();
+    $reply=Reply::all();
+    return view('shop',compact('products','comment','reply'));
 }
 
 }

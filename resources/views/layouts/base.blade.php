@@ -179,14 +179,16 @@
 
 
                                     <li>
-                                    <form action="{{route('searchproduct')}}" method="get" 
+                                    <form action="{{route('product_search')}}" method="get" 
                                     style="display: flex; align-items: center;">
-                                    
+
+                                    @csrf
                                     <input type="text" name="search" placeholder="Search Orders" 
                                     style="width: 200px; margin-right: 10px;">
 
                                     <button type="submit" class="btn btn-solid-default"
                                      style="display: flex; align-items: center; padding: 8px 12px; font-size: 14px;">
+
                                     <i data-feather="search" style="margin-right: 5px;"></i> 
                                     </button>
 

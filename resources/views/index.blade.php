@@ -2,6 +2,49 @@
 @section('content')
 
 
+
+<div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="assets/images/fashion/banner/1.jpg" alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-lg-7">
+                                    <h1 class="display-2 mb-5 animated slideInDown theme-color">Organic Food Is Good For Health</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="assets/images/fashion/banner/2.jpg" alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-lg-7">
+                                    <h1 class="display-2 mb-5 animated slideInDown theme-color">Natural Food Is Always Healthy</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+
     <!-- banner section start -->
     <section class="ratio2_1 banner-style-2">
         <div class="container">
@@ -9,7 +52,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="collection-banner p-bottom p-center text-center">
                         <a href="shop-left-sidebar.html" class="banner-img">
-                            <img src="assets/images/fashion/banner/1.jpeg" class="bg-img blur-up lazyload" alt="">
+                            <img src="assets/images/fashion/banner/4.jpg" class="bg-img blur-up lazyload" alt="">
                         </a>
                         <div class="banner-detail">
                             <a href="javacript:void(0)" class="heart-wishlist">
@@ -21,7 +64,7 @@
                         
                         <a href="shop-left-sidebar.html" class="contain-banner">
                             <div class="banner-content with-big">
-                            <h2 class="mb-2">FREASH</h2>
+                            <h2 class="mb-2">BUY</h2>
                                 <span>Deals</span>
                             </div>
                         </a>
@@ -30,7 +73,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="collection-banner p-bottom p-center text-center">
                         <a href="shop-left-sidebar.html" class="banner-img">
-                            <img src="assets/images/fashion/banner/2.jpg" class="bg-img blur-up lazyload" alt="">
+                            <img src="assets/images/fashion/banner/3.jpg" class="bg-img blur-up lazyload" alt="">
                         </a>
                         <div class="banner-detail">
                             <a href="javacript:void(0)" class="heart-wishlist">
@@ -49,7 +92,7 @@
                 <div class="col-lg-4">
                     <div class="collection-banner p-bottom p-center text-center">
                         <a href="shop-left-sidebar.html" class="banner-img">
-                            <img src="assets/images/fashion/banner/3.jpeg" class="bg-img blur-up lazyload" alt="">
+                            <img src="assets/images/fashion/banner/5.jpg" class="bg-img blur-up lazyload" alt="">
                         </a>
                         <div class="banner-detail">
                             <a href="javacript:void(0)" class="heart-wishlist">
@@ -155,6 +198,11 @@
                                         <a href="{{route('shop.product.details',['slug'=>$product->slug])}}"
                                         class="btn btn-solid-default">
                                         <i data-feather="eye"></i>
+                                        </a>
+                                        </li>
+                                        <li>
+                                        <a href="javascript:void(0)" class="wishlist">
+                                            <i data-feather="heart"></i>
                                         </a>
                                         </li>
                                     </ul>
