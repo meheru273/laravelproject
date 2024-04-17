@@ -38,9 +38,20 @@ Route::get('/order',[OrderController::class,'order'])->name('ordertable');
 
 Route::get('/delivered/{id}',[OrderController::class,'delivered'])->name('delivered');
 Route::get('/search',[OrderController::class,'search'])->name('search');
-
-
 Route::get('/search_product',[OrderController::class,'searchproduct'])->name('searchproduct');
+
+Route::get('/product_search',[UserController::class,'product_search'])->name('product_search');
+
+
+Route::get('/cancel_order/{id}',[UserController::class,'cancel_order'])->name('cancel_order');
+
+
+
+
+Route::post('/add_comment',[UserController::class,'add_comment'])->name('add_comment');
+Route::post('/add_reply',[UserController::class,'add_reply'])->name('add_reply');
+
+
 
 
 Route::get('/cart',[CartController::class,'cart'])->name('cart');

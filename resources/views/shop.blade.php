@@ -1,6 +1,7 @@
 @extends('layouts.base')
 @push('styles')
 <link id="color-link" rel="stylesheet" type="text/css" href="{{asset('assets/css/demo2.css')}}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         nav svg{
             height: 20px;
@@ -293,6 +294,11 @@
                        <i data-feather="eye"></i>
                        </a>
                     </li>
+                    <li>
+                        <a href="javascript:void(0)" class="wishlist">
+                            <i data-feather="heart"></i>
+                        </a>
+                    </li>
                 </ul>
                 
             </div>
@@ -341,28 +347,93 @@
         </div>
     </section>
     <!-- Shop Section end -->
-    <!-- Subscribe Section Start -->
-    <section class="subscribe-section section-b-space">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-6">
-                    <div class="subscribe-details">
-                        <h2 class="mb-3">Subscribe Our News</h2>
-                        <h6 class="font-light">Subscribe and receive our newsletters to follow the news about our fresh
-                            and fantastic Products.</h6>
-                    </div>
-                </div>
+    
 
-                <div class="col-lg-4 col-md-6 mt-md-0 mt-3">
-                    <div class="subsribe-input">
-                        <div class="input-group">
-                            <input type="text" class="form-control subscribe-input" placeholder="Your Email Address">
-                            <button class="btn btn-solid-default" type="button">Button</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Comments Section -->
+<div class="container mt-4" style="background-color: ">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4" style="font-size: 30px;">Comments</h1>
         </div>
-    </section>
+        <div class="col-12">
+        <form action="{{ route('add_comment') }}" method="POST">
+    @csrf
+    <div class="input-group mb-3">
+        <textarea class="form-control" name="comment" placeholder="Comment Something Here"
+                 style="height: 100px;"></textarea> <!-- Added the name attribute here -->
+    </div>
+    <input type="submit" class="btn btn-solid-default theme-color" style="color: black;" value="comment">
+</form>
+
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <h2 style="font-size: 20px;">All Comments</h2>
+        </div>
+            <!-- Example Comment -->
+            @foreach($comment as $comment)
+            <div class="mb-3">
+                <strong>{{$comment->name}}</strong>
+                <p style="color: black;">{{$comment->comment}}</p>
+                <a href="javascript:void(0);" class="btn btn-link theme-color"
+                 onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
+
+                 @foreach($reply as $rep)
+
+                 @if($rep->comment_id==$comment->id)
+                 <div style="padding-left: 3%; padding-bottom: 10px;">
+                 <strong>{{$rep->name}}</strong>
+                <p style="color: black;">{{$rep->reply}}</p>
+                 </div>
+                 <a href="javascript:void(0);" class="btn btn-link theme-color"
+                 onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
+
+                 @endif
+                 @endforeach
+
+                 <!-- reply div -->
+
+                @endforeach
+                    <div class="replyDiv" style="display: none;">
+                    <form method="post" action="{{route('add_reply')}}">
+                    @csrf
+                        <input type="text" id="commentId" name="commentId" hidden>
+                        <textarea class="form-control mb-2" placeholder="Write Some Comment" name="reply"></textarea>
+                        <button type="submit" class="btn btn-solid-default" id="replyButton" >Reply</button>
+                        <a href="javascript:void(0);" class="btn theme-color" onClick="reply_close(this)">Close</a>
+                        </form>
+                    </div>
+            </div>
+            
+
+    </div>
+</div>
+
+<!-- JavaScript to handle the reply functionality -->
+<script>
+    function reply(caller) {
+        document.getElementById('commentId').value=$(caller).attr('data-Commentid');
+        $('.replyDiv').insertAfter($(caller));
+        $('.replyDiv').show();
+    }
+    function reply_close(caller) {
+       $('.replyDiv').hide();
+    }
+        document.addEventListener("DOMContentLoaded", function (event) {
+        var scrollpos = sessionStorage.getItem('scrollpos');
+        if (scrollpos) {
+            window.scrollTo(0, scrollpos);
+            sessionStorage.removeItem('scrollpos');
+        }
+    });
+
+    window.addEventListener("beforeunload", function (e) {
+        sessionStorage.setItem('scrollpos', window.scrollY);
+    });
+
+
+</script>
+
 
 @endsection 

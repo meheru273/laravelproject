@@ -2,19 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Order;
 use Illuminate\Support\Facades\File;
 
 
 class AdminController extends Controller
 {
+    
     public function index()
     {
-        return view('admin.index');
+
+        $total_product=Product::all()->count();
+        $total_order=Order::all()->count();
+        $total_user=User::all()->count();
+
+        $order=Order::all();
+        $total_rev=0;
+        foreach($order as $order)
+        {
+            $total_rev+=$order->price;
+        }
+        $total_delivered=Order::where('delivery_status','=','delivered')->get()->count();
+        $total_processing=Order::where('delivery_status','=','processing')->get()->count();
+        return view('admin.index',compact('total_product','total_processing',
+    'total_order','total_user','total_rev','total_delivered'));
     }
 
     public function createproduct()

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
@@ -15,7 +17,9 @@ class ShopController extends Controller
     public function index()
     {
         $products=Product::orderBy('created_at','DESC')->paginate(12);
-        return view('shop',['products'=>$products]);
+        $comment=Comment::all();
+        $reply=Reply::all();
+        return view('shop',compact('products','comment','reply'));
     }
     public function productDetails($slug)
 {

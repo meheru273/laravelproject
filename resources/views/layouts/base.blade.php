@@ -36,6 +36,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick/slick-theme.css') }}">
     <link id="color-link" rel="stylesheet" type="text/css" href="{{ asset('assets/css/demo4.css') }}">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+ integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
+ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+ 
+
 
     <style>      .h-logo {
             max-width: 185px !important;
@@ -175,8 +181,10 @@
                                     <li>
                                     <form action="{{route('searchproduct')}}" method="get" 
                                     style="display: flex; align-items: center;">
+                                    
                                     <input type="text" name="search" placeholder="Search Orders" 
                                     style="width: 200px; margin-right: 10px;">
+
                                     <button type="submit" class="btn btn-solid-default"
                                      style="display: flex; align-items: center; padding: 8px 12px; font-size: 14px;">
                                     <i data-feather="search" style="margin-right: 5px;"></i> 
@@ -605,6 +613,16 @@
         $(function () {
             $('[data-bs-toggle="tooltip"]').tooltip()
         });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
     </script>
     @stack('script')
 
