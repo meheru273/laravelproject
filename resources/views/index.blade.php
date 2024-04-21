@@ -201,9 +201,13 @@
                                         </a>
                                         </li>
                                         <li>
-                                        <a href="javascript:void(0)" class="wishlist">
-                                            <i data-feather="heart"></i>
-                                        </a>
+                                        <form action="{{ route('add_wishlist', $product->id) }}" method="POST">
+                                            @csrf
+                                            
+                                                <button type="submit" class="btn btn-solid-default">
+                                                <i data-feather="heart"></i>
+                                                </button>
+                                        </form>
                                         </li>
                                     </ul>
                                 </div>

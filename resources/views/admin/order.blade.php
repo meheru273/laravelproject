@@ -25,7 +25,7 @@ style="padding-left: 200px; padding-bottom: 40px;padding-top: 40px;">
     </form>
 </div>
 <div class="container">
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered" style="text-size: 10px;">
         <thead class="thead-dark">
             <tr>
                 <th>Image</th>

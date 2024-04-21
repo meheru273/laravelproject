@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AppController;
@@ -34,6 +35,15 @@ Route::get('/stripe{totalprice}',[ShopController::class,'stripe'])->name('stripe
 Route::post('/stripe{totalprice}',[ShopController::class,'stripePost'])->name('stripe.post');
 
 
+
+
+Route::post('/add_wishlist/{id}',[WishlistController::class,'add_wishlist'])->name('add_wishlist');
+Route::get('/wishlist',[WishlistController::class,'show_wishlist'])->name('show_wishlist');
+Route::post('/wishlist/{id}',[WishlistController::class,'add_to_cart'])->name('add_to_cart');
+Route::get('/remove-wish/{id}',[WishlistController::class,'remove_wishlist'])->name('remove_wishlist');
+
+
+
 Route::get('/order',[OrderController::class,'order'])->name('ordertable');
 
 Route::get('/delivered/{id}',[OrderController::class,'delivered'])->name('delivered');
@@ -57,6 +67,9 @@ Route::post('/add_reply',[UserController::class,'add_reply'])->name('add_reply')
 Route::get('/cart',[CartController::class,'cart'])->name('cart');
 Route::get('add-to-cart/{slug}',[CartController::class,'addToCart'])->name('add-cart');
 Route::get('/remove/{slug}',[CartController::class,'remove'])->name('remove');
+
+
+
 
 Route::middleware(\App\Http\Middleware\Authenticate::class)->group(function(){
     Route::get('/my-account',[UserController::class,'index'])->name('user.index');
@@ -85,7 +98,7 @@ Route::delete('/c-delete/{id}',[CategoryController::class,'destroycat'])->name('
 
 
 Route::get('/brandlist',[BrandController::class,'bcreate'])->name('create.brand');
-Route::post('/brands',[BrandController::class,'storebrand'])->name('brand.store');
+Route::post('/brands/create',[BrandController::class,'storebrand'])->name('brand.store');
 Route::get('/b-list',[BrandController::class,'showbrand'])->name('show.blist');
 Route::get('/b-edit/{product}',[BrandController::class,'editb'])->name('admin.bedit');
 Route::put('/b-update/{product}',[BrandController::class,'updateb'])->name('admin.bupdate');

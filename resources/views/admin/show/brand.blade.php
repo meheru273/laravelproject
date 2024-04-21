@@ -21,7 +21,7 @@
                 <div class="card-header">
                     <h3 class="text-black">Create Product</h3>
                 </div>
-                <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <!-- Fields already provided -->

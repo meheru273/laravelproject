@@ -24,7 +24,7 @@ class CartController extends Controller
         $cart->name = $product->name;
         $cart->slug = $product->slug;
         
-        // Check if the product has a sale price, if not, use regular price
+        
         if ($product->sale_price) {
             $cart->price = $product->sale_price;
         } else {

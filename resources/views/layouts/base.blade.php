@@ -146,7 +146,7 @@
                                             <li><a href="{{route('app.index')}}" class="nav-link menu-title">Home</a></li>
                                             <li><a href="{{route('shop.index')}}" class="nav-link menu-title">Shop</a></li>
                                             <li><a href="{{route('user.cart')}}" class="nav-link menu-title">Cart</a></li>
-                                            <li><a href="about-us.html" class="nav-link menu-title">About Us</a></li>
+                                            <li><a href="{{route('show_wishlist')}}" class="nav-link menu-title">WishList</a></li>
                                             <li><a href="contact-us.html" class="nav-link menu-title">Contact Us</a>
                                             </li>
                                             <li><a href="blog.html" class="nav-link menu-title">Blog</a></li>
@@ -161,7 +161,7 @@
                                             <a href="wishlist/list.html">
                                                 <i data-feather="heart"></i>
                                                 <span id="wishlist-count" class="label label-theme rounded-pill">
-                                                    0
+                                                    
                                                 </span>
                                             </a>
                                         </div>

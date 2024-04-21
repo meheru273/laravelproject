@@ -1,6 +1,8 @@
 @include('admin.css')
 @include('admin.sidebar')
 <div class="main-panel">
+
+<div class="card-header">
 <div class="bg-dark py-3" >
     <h3 class="text-white text-center">Admin Panel</h3>
 </div>
@@ -16,10 +18,10 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-md-20">
-            <div class="card border-0 shadow-lg my-3">
-                <div class="card-header">
+            
+                
                     <h3 class="text-black">Create Product</h3>
-                </div>
+                
                 <div class="container">
                     <div class="row d-flex justify-content-center">
                         @if(Session::has('success'))
@@ -29,8 +31,8 @@
                             </div>
                         </div>
                         @endif
-                    <div class="col-md-20">
-                        <div class="card borde-0 shadow-lg my-4">
+                    <div class="col-md-30">
+                        
                             <div class="card-header bg-dark">
                                 <h3 class="text-white">Products</h3>
                             </div>
@@ -74,15 +76,15 @@
                                 </table>
 
                             </div>
-                        </div>
+
 
                     </div>
-            </div>
+
         </div>
     </div>
    
 </div>
-
+</div>
 @include('admin.script')
 
 </div>
