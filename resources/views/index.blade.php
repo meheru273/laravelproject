@@ -334,6 +334,108 @@
         }
     </style>
 
+       <!-- Comments Section -->
+
+       <style>
+    /* CSS to hide scrollbar but allow scrolling */
+    .scrollbar-hidden::-webkit-scrollbar {
+        display: none; /* for Chrome, Safari, and Opera */
+    }
+    .scrollbar-hidden {
+        -ms-overflow-style: none;  /* for Internet Explorer, Edge */
+        scrollbar-width: none;  /* for Firefox */
+    }
+</style>
+
+<div class="container p-sm-0">
+            <div class="row m-0">
+                <div class="col-12 p-0">
+                    <div class="title-3 text-center">
+                        <br><br><br><br>
+                        <h2>Comment Here</h2>
+                        <h5 class="theme-color">Your Opinion</h5>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+    
+<div class="container mt-4 card border-0 shadow my-1" style="background-color: ;">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4" style="font-size: 30px; padding-top: 20px;">Comments</h1>
+        </div>
+        <div class="col-12">
+            <form action="{{ route('add_comment') }}" method="POST">
+                @csrf
+                <div class="input-group mb-3">
+                    <textarea class="form-control" name="comment" placeholder="Comment Something Here" style="height: 100px;"></textarea>
+                </div>
+                <input type="submit" class="btn btn-solid-default theme-color" style="color: black;" value="comment">
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-5 ">
+        <div class="col-12">
+            <h2 style="font-size: 20px;">All Comments</h2>
+        </div>
+        <div class="col-12 " style="max-height: 500px; overflow-y: auto;">
+            <div class="scrollbar-hidden">
+                <!-- Example Comment -->
+                @foreach($comment as $comment)
+                <div class="mb-3">
+                    <strong>{{$comment->name}}</strong>
+                    <p style="color: black;">{{$comment->comment}}</p>
+                    <a href="javascript:void(0);" class="btn btn-link theme-color" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
+
+                    @foreach($reply as $rep)
+                    @if($rep->comment_id == $comment->id)
+                    <div style="padding-left: 3%; padding-bottom: 10px;">
+                        <strong>{{$rep->name}}</strong>
+                        <p style="color: black;">{{$rep->reply}}</p>
+                    </div>
+                    <a href="javascript:void(0);" class="btn btn-link theme-color" onclick="reply(this)" data-Commentid="{{$comment->id}}">Reply</a>
+                    @endif
+                    @endforeach
+                </div>
+                @endforeach
+                <div class="replyDiv" style="display: none;">
+                    <form method="post" action="{{route('add_reply')}}">
+                        @csrf
+                        <input type="text" id="commentId" name="commentId" hidden>
+                        <textarea class="form-control mb-2" placeholder="Write Some Comment" name="reply"></textarea>
+                        <button type="submit" class="btn btn-solid-default" id="replyButton">Reply</button>
+                        <a href="javascript:void(0);" class="btn theme-color" onClick="reply_close(this)">Close</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- JavaScript to handle the reply functionality -->
+<script>
+    function reply(caller) {
+        document.getElementById('commentId').value = $(caller).attr('data-Commentid');
+        $('.replyDiv').insertAfter($(caller));
+        $('.replyDiv').show();
+    }
+    function reply_close(caller) {
+        $('.replyDiv').hide();
+    }
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        var scrollpos = sessionStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+        sessionStorage.removeItem('scrollpos');
+    });
+
+    window.addEventListener("beforeunload", function (e) {
+        sessionStorage.setItem('scrollpos', window.scrollY);
+    });
+    
+</script>
+
+<br><br><br>
     <!-- Subscribe Section Start -->
     <section class="subscribe-section section-b-space">
         <div class="container">

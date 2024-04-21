@@ -21,7 +21,11 @@ class UserController extends Controller
             $user=Auth::user();
             $userid=$user->id;
             $order=Order::where('user_id','=',$userid)->get();
-            return view('user.index',compact('order'));
+            $total_order=Order::where('user_id','=',$userid)->get()->count();
+            $total_processing = Order::where('user_id', $userid)
+                                 ->where('delivery_status', 'processing')
+                                 ->count();
+            return view('user.index',compact('order','user','total_order','total_processing'));
         }
         
     }

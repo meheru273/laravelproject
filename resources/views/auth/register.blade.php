@@ -38,10 +38,23 @@
                         @error('name')<span class="text-danger mt-3">{{$message}}</span>@enderror
                     </div>
 
-                    <label for="emailname">Email Address</label><br>
+                    <label for="emailname">Email</label><br>
                     <div class="input">
                         <input type="email" id="emailname" class="block mt-1 w-full" type="email" name="email"
                             :value="old('email')" required="" autocomplete="username">
+                            @error('email')<span class="text-danger mt-3">{{$message}}</span>@enderror
+                    </div>
+                    <label for="emailname">Phone</label><br>
+                    <div class="input">
+                        <input type="number" id="phone" class="block mt-1 w-full" type="phone" name="phone"
+                            :value="old('phone')" required="" autocomplete="username">
+                            @error('email')<span class="text-danger mt-3">{{$message}}</span>@enderror
+                    </div>
+
+                    <label for="emailname">Address</label><br>
+                    <div class="input">
+                        <input type="text" id="address" class="block mt-1 w-full" type="address" name="address"
+                            :value="old('address')" required="" autocomplete="username">
                             @error('email')<span class="text-danger mt-3">{{$message}}</span>@enderror
                     </div>
 
