@@ -1,13 +1,30 @@
 @extends('layouts.base')
-@section('content')
 
+<style>
+               .swal2-confirm {
+                background-color: #D9730D !important; 
+            }
+
+
+            .swal2-confirm:hover {
+                background-color: #C6690B !important; 
+            }
+
+            .swal2-popup {
+                font-size: 12px; 
+                width: auto;
+                max-width: 400px;
+            }
+</style>
+@section('content')
+@include('sweetalert::alert')
 
 
 <div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="assets/images/fashion/banner/1.jpg" alt="Image">
+                    <img class="w-100" src="assets/images/fashion/banner/1.jpg" alt="Image" style="padding-right: 60px; padding-left: 60px;">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-start">
@@ -19,7 +36,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="assets/images/fashion/banner/2.jpg" alt="Image">
+                    <img class="w-100" src="assets/images/fashion/banner/2.jpg" alt="Image" style="padding-right: 60px; padding-left: 60px;">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-start">
@@ -381,7 +398,7 @@
 
     <div class="row mt-5 ">
         <div class="col-12">
-            <h2 style="font-size: 20px;">All Comments</h2>
+            <h2 style="font-size: 20px; padding-bottom: 20px;">All Comments</h2>
         </div>
         <div class="col-12 " style="max-height: 500px; overflow-y: auto;">
             <div class="scrollbar-hidden">

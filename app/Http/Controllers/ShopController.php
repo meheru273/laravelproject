@@ -11,6 +11,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use Stripe;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ShopController extends Controller
 {
@@ -57,9 +58,10 @@ public function add_cart($id,Request $request)
          $cart->quantity=$request->quantity;
 
          $cart->save();
+
+         Alert::success('Product Added Successfully','To Cart');
+
          return redirect()->back();
-
-
 
     }
     else 
@@ -87,7 +89,9 @@ public function remove_cart($id)
 {
     $cart=Cart::find($id);
     $cart->delete();
+    Alert::success('Product removed Successfully','To Cart');
     return redirect()->back();
+
 }
 
 public function cash_order()

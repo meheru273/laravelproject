@@ -9,10 +9,27 @@
         .product-box .product-details h5 {            
             width: 100%;	
         }
-    </style>
-@endpush
-@section('content')
 
+            .swal2-confirm {
+                background-color: #D9730D !important; 
+            }
+
+
+            .swal2-confirm:hover {
+                background-color: #C6690B !important; 
+            }
+
+            .swal2-popup {
+                font-size: 12px; 
+                width: auto;
+                max-width: 400px;
+            }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@endpush
+
+@section('content')
+@include('sweetalert::alert')
 
 <section class="breadcrumb-section section-b-space" style="padding-top:20px;padding-bottom:20px;">
         <ul class="circles">
@@ -281,6 +298,7 @@
                 </div>
                 </ul>
                 <ul>
+                    
                 <li>
                     <button type="submit" class="btn btn-solid-default"
                     action="{{route('shop.product.details',['slug'=>$product->slug])}}">
@@ -288,6 +306,7 @@
                     </button>
                 </li>
                 </form>
+                
                     <li>
                        <a href="{{route('shop.product.details',['slug'=>$product->slug])}}"
                        class="btn btn-solid-default">
@@ -417,6 +436,9 @@
         </div>
     </div>
 </div>
+
+
+
 <!-- JavaScript to handle the reply functionality -->
 <script>
     function reply(caller) {

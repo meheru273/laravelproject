@@ -158,25 +158,14 @@
                                 <ul>
                                 <li class="onhover-dropdown wislist-dropdown">
                                         <div class="cart-media">
-                                            <a href="wishlist/list.html">
-                                                <i data-feather="heart"></i>
-                                                <span id="wishlist-count" class="label label-theme rounded-pill">
-                                                    
-                                                </span>
-                                            </a>
+
                                         </div>
                                     </li>
                                     <li class="onhover-dropdown wislist-dropdown">
                                         <div class="cart-media">
-                                            <a href="cart/list.html">
-                                                <i data-feather="shopping-cart"></i>
-                                                <span id="cart-count" class="label label-theme rounded-pill">
-                                                    0
-                                                </span>
-                                            </a>
+
                                         </div>
                                     </li>
-
 
                                     <li>
                                     <form action="{{route('product_search')}}" method="get" 
@@ -184,18 +173,17 @@
 
                                     @csrf
                                     <input type="text" name="search" placeholder="Search Orders" 
-                                    style="width: 200px; margin-right: 10px;">
+                                    style="width: 300px; margin-right: 10px; margin-top: 15px;">
 
                                     <button type="submit" class="btn btn-solid-default"
-                                     style="display: flex; align-items: center; padding: 8px 12px; font-size: 14px;">
+                                     style="display: flex; align-items: center; padding: 8px 12px; font-size: 14px;
+                                     margin-top: 15px;">
 
                                     <i data-feather="search" style="margin-right: 5px;"></i> 
                                     </button>
-
                                     </form>
-
-                                    
                                     </li>
+                                    
 
                                    <li class="onhover-dropdown">
     <div class="cart-media name-usr">

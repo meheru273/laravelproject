@@ -34,6 +34,8 @@ Route::post('/user/{user}/password', [UserController::class, 'changePassword'])-
 
 
 
+
+
 Route::get('/user-status', [AdminController::class, 'user_status'])->name('user_status');
 Route::delete('/delete_user/{id}',[AdminController::class,'delete_user'])->name('delete_user');
 

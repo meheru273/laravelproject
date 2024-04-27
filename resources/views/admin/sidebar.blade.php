@@ -56,7 +56,7 @@
           <li>
             <a href="{{route('user_status')}}">
               <i class="nc-icon nc-caps-small"></i>
-              <p>Typography</p>
+              <p>Users</p>
             </a>
           </li>
           <li class="active-pro">
