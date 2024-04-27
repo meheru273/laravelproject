@@ -54,7 +54,7 @@
             </a>
           </li>
           <li>
-            <a href="./typography.html">
+            <a href="{{route('user_status')}}">
               <i class="nc-icon nc-caps-small"></i>
               <p>Typography</p>
             </a>

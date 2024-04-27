@@ -149,7 +149,7 @@
                                             <li><a href="{{route('show_wishlist')}}" class="nav-link menu-title">WishList</a></li>
                                             <li><a href="contact-us.html" class="nav-link menu-title">Contact Us</a>
                                             </li>
-                                            <li><a href="blog.html" class="nav-link menu-title">Blog</a></li>
+                                            <li><a href="{{route('recipes')}}" class="nav-link menu-title">Blog</a></li>
                                         </ul>
                                     </div>
                                 </div>

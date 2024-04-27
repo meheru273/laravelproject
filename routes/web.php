@@ -11,15 +11,34 @@ use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\SpoonacularController;
+
 
 if( ini_get( 'wincache.ocenabled' ) )
 {
     ini_set( 'wincache.ocenabled', '0' );
 }
 
+Route::get('/recipes/search', [SpoonacularController::class, 'search'])->name('recipes');
 
 
-Route::get('/',[AppController::class,'index'])->name('app.index')->middleware('verified');
+Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+
+Route::post('/user/{user}', [UserController::class, 'update'])->name('user.update');
+
+Route::delete('/user/{id}/delete', [UserController::class, 'deleteid'])->name('user.delete');
+
+Route::get('/user/{user}/password', [UserController::class, 'changePasswordForm'])->name('user.change-password');
+
+Route::post('/user/{user}/password', [UserController::class, 'changePassword'])->name('user.update-password');
+
+
+
+Route::get('/user-status', [AdminController::class, 'user_status'])->name('user_status');
+Route::delete('/delete_user/{id}',[AdminController::class,'delete_user'])->name('delete_user');
+
+
+Route::get('/',[AppController::class,'index'])->name('app.index');
 
 
 
@@ -72,9 +91,12 @@ Route::get('/remove/{slug}',[CartController::class,'remove'])->name('remove');
 
 
 
-Route::middleware(\App\Http\Middleware\Authenticate::class)->group(function(){
-    Route::get('/my-account',[UserController::class,'index'])->name('user.index');
+Route::middleware(\App\Http\Middleware\Authenticate::class)->group(function() {
+    Route::get('/my-account', [UserController::class, 'index'])
+        ->middleware('verified')  // Adding the verified middleware here
+        ->name('user.index');
 });
+
 
 Route::middleware([\App\Http\Middleware\Authenticate::class,\App\Http\Middleware\AuthAdmin::class])->group(function(){
     Route::get('/admin',[AdminController::class,'index'])->name('admin.index');

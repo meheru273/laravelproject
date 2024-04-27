@@ -113,33 +113,7 @@
                     </div>
                 </div>
 
-                <div class="cart-checkout-section">
-                        <div class="col-lg-4 col-sm-4">
-                            <div class="cart-box">
-                                <div class="cart-box-details">
-                                    <div class="total-details">
-                                        <div class="top-details">
-                                            <h3>Cart Totals</h3>
-                                            <h6>Total Price :<span> {{$totalprice}}$</span> </h6>
-                                        </div>
-                                        <div class="bottom-details">
-                                            <a href="checkout">Process Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8 col-sm-8" style="padding: 30px;">
-                            <div class="checkout-button">
-                                <a href="{{route('cash_order')}}" class="btn btn-solid-default btn fw-bold" >
-                                    Cash On DElivery <i class="fas fa-arrow-right ms-1"></i></a>
-                                    <span><span> </span></span>
-                                <a href="{{route('stripe',$totalprice)}}" class="btn btn-solid-default btn fw-bold">
-                                    Pay by Card <i class="fas fa-arrow-right ms-1"></i></a>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserDelete;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
@@ -21,6 +23,7 @@ class AdminController extends Controller
         $total_product=Product::all()->count();
         $total_order=Order::all()->count();
         $total_user=User::all()->count();
+        $total_wishlist=Wishlist::all()->count();
 
         $order=Order::all();
         $total_rev=0;
@@ -31,7 +34,7 @@ class AdminController extends Controller
         $total_delivered=Order::where('delivery_status','=','delivered')->get()->count();
         $total_processing=Order::where('delivery_status','=','processing')->get()->count();
         return view('admin.index',compact('total_product','total_processing',
-    'total_order','total_user','total_rev','total_delivered'));
+    'total_order','total_user','total_rev','total_delivered','total_wishlist'));
     }
 
     public function createproduct()
@@ -171,5 +174,25 @@ class AdminController extends Controller
 
     $category->delete();
     return redirect()->back()->with('message','Product deleted successfully');
+ }
+
+ public function user_status()
+ {
+    $user= UserDelete::orderBy('created_at','DESC')->get();
+
+    return view('admin.user',[
+        'user'=>$user
+    ]);
+
+ }
+ public function delete_user($id)
+ {
+    $user1=User::findOrFail($id);
+    $user2 = UserDelete::findOrFail($id);
+    $user1->delete();
+    $user2->delete();
+
+    return redirect()->back();
+
  }
 }

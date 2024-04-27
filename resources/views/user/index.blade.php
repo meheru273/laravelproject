@@ -83,7 +83,7 @@
                                                         <img src="assets/images/svg/wishlist1.png" class="img-fluid blur-up lazyload" alt="">
                                                         <div>
                                                             <h5 class="font-light">wishlist</h5>
-                                                            <h3>63874</h3>
+                                                            <h3>{{$total_wishlist}}</h3>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -95,51 +95,38 @@
                                         <div class="box-head">
                                             <h3>Account Information</h3>
                                         </div>
+                                        @if(session('success'))
+                                        <div class="alert alert-success">{{ session('success') }}</div>
+                                        @endif
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="box">
                                                     <div class="box-title">
-                                                        <h4>Contact Information</h4><a href="javascript:void(0)">Edit</a>
+                                                        <h2>Contact Information</h2><a href="{{ route('user.edit', $user) }}">Edit</a>
                                                     </div>
                                                     <div class="box-content">
-                                                        <h6 class="font-light">{{$user->name}}</h6>
-                                                        <h6 class="font-light">{{$user->email}}</h6>
-                                                        <a href="javascript:void(0)">Change Password</a>
+                                                        <h4 class="font-light">{{$user->name}}</h4><br>
+                                                        <h4 class="font-light">{{$user->email}}</h4><br>
+                                                        <h4 class="font-light">{{$user->phone}}</h4><br>
+                                                        <a href="{{ route('user.change-password', $user) }}">Change Password</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="box">
-                                                    <div class="box-title">
-                                                        <h4>Newsletters</h4><a href="javascript:void(0)">Edit</a>
-                                                    </div>
-                                                    <div class="box-content">
-                                                        <h6 class="font-light">You are currently not subscribed to any
-                                                            newsletter.</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div>
                                             <div class="box address-box">
                                                 <div class="box-title">
-                                                    <h4>Address Book</h4><a href="javascript:void(0)">Manage
-                                                        Addresses</a>
+                                                    <h3>Address Book</h3>
                                                 </div>
                                                 <div class="box-content">
                                                     <div class="row g-4">
                                                         <div class="col-sm-6">
-                                                            <h6 class="font-light">Default Billing Address</h6>
-                                                            <h6 class="font-light">You have not set a default
-                                                                billing address.</h6>
-                                                            <a href="javascript:void(0)">Edit Address</a>
+                                                            <h4 class="font-light">{{$user->address}}</h4>
+                                                            <h4 class="font-light">You have not set a default
+                                                                billing address.</h4>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <h6 class="font-light">Default Shipping Address</h6>
-                                                            <h6 class="font-light">You have not set a default
-                                                                shipping address.</h6>
-                                                            <a href="javascript:void(0)">Edit Address</a>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -238,8 +225,36 @@
                                 <p class="font-light mb-4">If you understand and agree to the above statement, and would
                                     still like to delete your account, than click below</p>
 
-                                <button class="btn btn-solid-default btn-sm fw-bold rounded" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Your
-                                    Account</button>
+                                <!-- Button to open modal -->
+<button class="btn btn-solid-default btn-sm fw-bold rounded" data-bs-toggle="modal" data-bs-target="#deleteModal">
+    Delete Your Account
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your account?
+            </div>
+            <div class="modal-footer">
+                <form method="POST" action="{{ route('user.delete', $user->id) }}">
+                    @csrf
+                    @method('DELETE') 
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-solid-default">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
                             </div>
                         </div>
                     </div>

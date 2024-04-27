@@ -295,9 +295,13 @@
                        </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" class="wishlist">
-                            <i data-feather="heart"></i>
-                        </a>
+                    <form action="{{ route('add_wishlist', $product->id) }}" method="POST">
+                    @csrf
+                                            
+                        <button type="submit" class="btn btn-solid-default">
+                        <i data-feather="heart"></i>
+                        </button>
+                    </form>
                     </li>
                 </ul>
                 
@@ -360,7 +364,7 @@
     }
 </style>
     
-<div class="container mt-4 card border-0 shadow-lg my-1" style="background-color: ;">
+<div class="container mt-4 card border-0 shadow my-1" style="background-color: ;">
     <div class="row">
         <div class="col-12">
             <h1 class="mb-4" style="font-size: 30px; padding-top: 20px;">Comments</h1>
@@ -378,7 +382,7 @@
 
     <div class="row mt-5 ">
         <div class="col-12">
-            <h2 style="font-size: 20px;">All Comments</h2>
+            <h2 style="font-size: 20px; padding-bottom: 20px;">All Comments</h2>
         </div>
         <div class="col-12 " style="max-height: 500px; overflow-y: auto;">
             <div class="scrollbar-hidden">
