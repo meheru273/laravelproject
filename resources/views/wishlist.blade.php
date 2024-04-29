@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('content')
-
+@include('sweetalert::alert')
 <section class="breadcrumb-section section-b-space" style="padding-top:20px;padding-bottom:20px;">
         <ul class="circles">
             <li></li>
@@ -69,7 +69,7 @@
                                     
                                     @csrf
                                 <td>
-                                <input type="number" name="quantity" value="1"
+                                <input type="number" name="quantity" value="{{$cart->quantity}}"
                                     min="1" style="width: 100px; height:40px; margin-bottom: 20px;">
                                 </td>
                                 <td>

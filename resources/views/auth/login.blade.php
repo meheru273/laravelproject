@@ -1,6 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
+@include('sweetalert::alert')
 <style>
         input [type="text"]:focus,
         [type="email"]:focus,

@@ -34,30 +34,61 @@ public function add_cart($id,Request $request)
     if(Auth::id())
     {
          $user=Auth::user();
+         $userid=$user->id;
          $product=Product::find($id);
-         $cart=new Cart();
-         $cart->name=$user->name;
-         $cart->email=$user->email;
-         $cart->phone=$user->phone;
-         $cart->address=$user->address;
-         $cart->user_id=$user->id;
 
-         $cart->slug=$product->slug;
+        $product_exist_id=Cart::where('product_id','=',$id)->where('user_id'
+        ,'=',$userid)->get('id')->first();
 
-         if($product->sale_price !=null)
+        if($product_exist_id)
+        {
+
+            $cart=Cart::find($product_exist_id)->first();
+
+            $quantity=$cart->quantity;
+
+            $cart->quantity=$quantity+$request->quantity;
+
+            if($product->sale_price !==null)
          {
-            $cart->price=$product->sale_price * $request->quantity;
+            $cart->price=$product->sale_price * $cart->quantity;
          }
          else
          {
-            $cart->price=$product->regular_price * $request->quantity;
+            $cart->price=$product->regular_price * $cart->quantity;
          }
-         
-         $cart->image=$product->image;
-         $cart->product_id=$product->id;
-         $cart->quantity=$request->quantity;
 
-         $cart->save();
+            $cart->save();
+        }
+        else
+        {
+
+            $cart=new Cart();
+            $cart->name=$user->name;
+            $cart->email=$user->email;
+            $cart->phone=$user->phone;
+            $cart->address=$user->address;
+            $cart->user_id=$user->id;
+   
+            $cart->slug=$product->slug;
+   
+            if($product->sale_price !=null)
+            {
+               $cart->price=$product->sale_price * $request->quantity;
+            }
+            else
+            {
+               $cart->price=$product->regular_price * $request->quantity;
+            }
+            
+            $cart->image=$product->image;
+            $cart->product_id=$product->id;
+            $cart->quantity=$request->quantity;
+   
+            $cart->save();
+        }
+
+        
 
          Alert::success('Product Added Successfully','To Cart');
 
@@ -66,6 +97,7 @@ public function add_cart($id,Request $request)
     }
     else 
     {
+        Alert::success('You Need To LogIn');
         return redirect('login');
     }
 }
@@ -80,6 +112,7 @@ public function show_cart()
     }
     else
     {
+        Alert::success('You Need To LogIn');
         return redirect('login')->with('message','please login in');
     }
 
@@ -89,7 +122,7 @@ public function remove_cart($id)
 {
     $cart=Cart::find($id);
     $cart->delete();
-    Alert::success('Product removed Successfully','To Cart');
+    Alert::success('Product removed Successfully','From Cart');
     return redirect()->back();
 
 }

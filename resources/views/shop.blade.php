@@ -288,43 +288,56 @@
                 </a>
             </div>
             <div class="cart-wrap">
-                <form action="{{route('add_cart',$product->id)}}" method="POST">
-                
-                @csrf
-                <ul>
+                <!-- Quantity Input -->
                 <div>
-                <input type="number" name="quantity" value="1"
-                min="1" style="width: 100px; height:40px; margin-bottom: 20px;">
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 100px; height:40px; margin-bottom: 20px;">
                 </div>
-                </ul>
                 <ul>
-                    
-                <li>
-                    <button type="submit" class="btn btn-solid-default"
-                    action="{{route('shop.product.details',['slug'=>$product->slug])}}">
-                        <i data-feather="shopping-cart"></i>
-                    </button>
-                </li>
-                </form>
-                
+                    <!-- Cart Form -->
                     <li>
-                       <a href="{{route('shop.product.details',['slug'=>$product->slug])}}"
-                       class="btn btn-solid-default">
-                       <i data-feather="eye"></i>
-                       </a>
+                        <form id="cartForm" action="{{ route('add_cart', $product->id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="quantity" id="cartQuantity" value="1">  <!-- Hidden input for quantity -->
+                            <button type="button" onclick="submitCartForm()" class="btn btn-solid-default">
+                                <i data-feather="shopping-cart"></i>
+                            </button>
+                        </form>
                     </li>
+
+                    <!-- View Details -->
                     <li>
-                    <form action="{{ route('add_wishlist', $product->id) }}" method="POST">
-                    @csrf
-                                            
-                        <button type="submit" class="btn btn-solid-default">
-                        <i data-feather="heart"></i>
-                        </button>
-                    </form>
+                        <a href="{{ route('shop.product.details', ['slug' => $product->slug]) }}" class="btn btn-solid-default">
+                            <i data-feather="eye"></i>
+                        </a>
+                    </li>
+
+                    <!-- Wishlist Form -->
+                    <li>
+                        <form id="wishlistForm" action="{{ route('add_wishlist', $product->id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="quantity" id="wishlistQuantity" value="1">  <!-- Hidden input for quantity -->
+                            <button type="button" onclick="submitWishlistForm()" class="btn btn-solid-default">
+                                <i data-feather="heart"></i>
+                            </button>
+                        </form>
                     </li>
                 </ul>
-                
             </div>
+            <script>
+            function submitCartForm() {
+                var quantity = document.getElementById('quantity').value;
+                document.getElementById('cartQuantity').value = quantity;
+                document.getElementById('cartForm').submit();
+            }
+
+            function submitWishlistForm() {
+                var quantity = document.getElementById('quantity').value;
+                document.getElementById('wishlistQuantity').value = quantity;
+                document.getElementById('wishlistForm').submit();
+            }
+            </script>
+
+            
         </div>
         <div class="product-details">
             <div class="rating-details">

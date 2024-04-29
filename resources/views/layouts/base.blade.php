@@ -57,6 +57,22 @@
             }
         }
     </style>
+    <style>
+            .swal2-confirm {
+                background-color: #D9730D !important; 
+            }
+
+
+            .swal2-confirm:hover {
+                background-color: #C6690B !important; 
+            }
+
+            .swal2-popup {
+                font-size: 12px; 
+                width: auto;
+                max-width: 400px;
+            }
+    </style>
     <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
    @stack('styles')
 

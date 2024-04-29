@@ -12,6 +12,9 @@ use App\Models\Wishlist;
 
 use App\Models\Cart;
 
+use RealRashid\SweetAlert\Facades\Alert;
+
+
 class WishlistController extends Controller
 {
 
@@ -24,17 +27,44 @@ class WishlistController extends Controller
     if(Auth::id())
     {
          $user=Auth::user();
+         $userid=$user->id;
          $product=Product::find($id);
+         
+         $product_exist_id = Wishlist::where('product_id', '=', $id)
+         ->where('user_id', '=', $userid)->get('id')->first();
+
+
+         if($product_exist_id)
+        {
+
+            $cart=Wishlist::find($product_exist_id)->first();
+
+            $quantity=$cart->quantity;
+
+            $cart->quantity=$quantity+$request->quantity;
+
+                if($product->sale_price !==null)
+                {
+                    $cart->price=$product->sale_price * $cart->quantity;
+                }
+                else
+                {
+                    $cart->price=$product->regular_price * $cart->quantity;
+                }
+
+                    $cart->save();
+        }
+        else{
          $cart=new Wishlist();
          $cart->name=$user->name;
          $cart->email=$user->email;
          $cart->phone=$user->phone;
          $cart->address=$user->address;
          $cart->user_id=$user->id;
-
+         $cart->quantity=$request->quantity;
          $cart->slug=$product->slug;
 
-         if($product->sale_price !=null)
+         if($product->sale_price !==null)
          {
             $cart->price=$product->sale_price * $request->quantity;
          }
@@ -45,16 +75,19 @@ class WishlistController extends Controller
          
          $cart->image=$product->image;
          $cart->product_id=$product->id;
-         $cart->quantity=$request->quantity;
 
          $cart->save();
-         return redirect()->back();
+        }
 
+         Alert::success('Product Added Successfully','In WishList');
+         return redirect()->back();
 
 
     }
     else 
     {
+        
+        Alert::success('You Need To Login First');
         return redirect('login');
     }
 }
@@ -69,6 +102,7 @@ public function show_wishlist()
     }
     else
     {
+        Alert::success('You Need To LogIn');
         return redirect('login')->with('message','please login in');
     }
 
@@ -77,35 +111,59 @@ public function show_wishlist()
 public function add_to_cart($id, Request $request)
 {
     if (!Auth::check()) {
-        return redirect('login')->with('error', 'You need to be logged in');
+        Alert::error('You need to log in first');
+        return redirect('login');
     }
 
+    $wishlistItem = Wishlist::find($id);
+    if (!$wishlistItem) {
+        return back()->with('error', 'Wishlist item not found.');
+    }
 
-    $product = Wishlist::find($id);
-    if (!$product) {
+    $userid = Auth::id();
+
     
-        return back()->with('error', 'Product not found.');
+    $product_exist = Cart::where('product_id', $wishlistItem->product_id)
+                         ->where('user_id', $userid)
+                         ->first();
+
+    if ($product_exist) {
+
+        $product_exist->quantity += $request->input('quantity');
+        if ($wishlistItem->sale_price !== null) {
+            $product_exist->price = $wishlistItem->sale_price * $product_exist->quantity;
+        } else {
+            $product_exist->price = $wishlistItem->regular_price * $product_exist->quantity;
+        }
+        $product_exist->save();
+    } else {
+
+        $cart = new Cart();
+        $cart->product_id = $wishlistItem->product_id;
+        $cart->slug = $wishlistItem->slug;
+        $cart->price = $wishlistItem->sale_price ?? $wishlistItem->regular_price;
+        $cart->email = $wishlistItem->email;
+        $cart->phone = $wishlistItem->phone;
+        $cart->address = $wishlistItem->address;
+        $cart->user_id = $userid;
+        $cart->quantity = $request->input('quantity');
+        $cart->name = $wishlistItem->name;
+        $cart->image = $wishlistItem->image;
+        $cart->save();
     }
 
+    
+    $wishlistItem->delete();
 
-    $cart = new Cart();
-    $cart->product_id = $product->id;
-    $cart->user_id = Auth::id(); 
-    $cart->quantity = $request->input('quantity');
-    $cart->price = $product->sale_price ? $product->sale_price : $product->regular_price;
-
-
-    $cart->name = $product->name;
-    $cart->image = $product->image;
-    $cart->save();
-
-    $product->delete();
-    return back()->with('success', 'Product added to cart successfully.');
+    Alert::success('Product added to cart successfully');
+    return redirect()->back()->with('success', 'Product added to cart successfully');
 }
+
 public function remove_wishlist($id)
 {
     $cart=Wishlist::find($id);
     $cart->delete();
+    Alert::success('Product Removed Successfully','From WishList');
     return redirect()->back();
 }
 

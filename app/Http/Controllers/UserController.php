@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Hash;
 use App\Models\UserDelete;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -56,6 +57,7 @@ public function add_comment(Request $request)
 
         return redirect()->back();
     } else {
+        Alert::success('You Need To LogIn');
         return redirect('login');
     }
 }
@@ -76,6 +78,7 @@ public function add_reply(Request $request)
     }
     else 
     {
+        Alert::success('You Need To LogIn');
         return redirect('login');
     }
 }

@@ -1,6 +1,23 @@
 @extends('layouts.base')
-@section('content')
+<style>
 
+            .swal2-confirm {
+                background-color: #D9730D !important; 
+            }
+
+
+            .swal2-confirm:hover {
+                background-color: #C6690B !important; 
+            }
+
+            .swal2-popup {
+                font-size: 12px; 
+                width: auto;
+                max-width: 400px;
+            }
+    </style>
+@section('content')
+@include('sweetalert::alert')
     <!-- Cart Section Start -->
     <section class="cart-section section-b-space">
         <div class="container">
