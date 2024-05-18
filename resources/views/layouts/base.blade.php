@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+@livewireStyles
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="MkRqEzTGuoSx6LqJUm0OAKxSgNUYt26wTT7RMUZY">
@@ -39,7 +40,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+ 
  
 
 
@@ -159,13 +160,13 @@
                                                     </span>
                                                 </div>
                                             </li>
-                                            <li><a href="{{route('app.index')}}" class="nav-link menu-title">Home</a></li>
-                                            <li><a href="{{route('shop.index')}}" class="nav-link menu-title">Shop</a></li>
-                                            <li><a href="{{route('user.cart')}}" class="nav-link menu-title">Cart</a></li>
-                                            <li><a href="{{route('show_wishlist')}}" class="nav-link menu-title">WishList</a></li>
+                                            <li><a href="{{route('app.index')}}" wire:navigate class="nav-link menu-title">Home</a></li>
+                                            <li><a href="{{route('shop.index')}}" wire:navigate class="nav-link menu-title">Shop</a></li>
+                                            <li><a href="{{route('user.cart')}}" wire:navigate class="nav-link menu-title">Cart</a></li>
+                                            <li><a href="{{route('show_wishlist')}}" wire:navigate class="nav-link menu-title">WishList</a></li>
                                             <li><a href="contact-us.html" class="nav-link menu-title">Contact Us</a>
                                             </li>
-                                            <li><a href="{{route('recipes')}}" class="nav-link menu-title">Blog</a></li>
+                                            <li><a href="{{route('recipes')}}" wire:navigate class="nav-link menu-title">Blog</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -633,5 +634,5 @@
     @stack('script')
 
 </body>
-
+@livewireScripts
 </html>

@@ -61,7 +61,7 @@ Route::post('/stripe{totalprice}',[ShopController::class,'stripePost'])->name('s
 
 Route::post('/add_wishlist/{id}',[WishlistController::class,'add_wishlist'])->name('add_wishlist');
 Route::get('/wishlist',[WishlistController::class,'show_wishlist'])->name('show_wishlist');
-Route::post('/wishlist/{id}',[WishlistController::class,'add_to_cart'])->name('add_to_cart');
+Route::post('/wishlist/{id}', [WishlistController::class, 'add_to_cart'])->name('add_to_cart');
 Route::get('/remove-wish/{id}',[WishlistController::class,'remove_wishlist'])->name('remove_wishlist');
 
 

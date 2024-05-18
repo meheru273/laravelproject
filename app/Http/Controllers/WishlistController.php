@@ -45,11 +45,11 @@ class WishlistController extends Controller
 
                 if($product->sale_price !==null)
                 {
-                    $cart->price=$product->sale_price * $cart->quantity;
+                    $cart->price=$product->sale_price;
                 }
                 else
                 {
-                    $cart->price=$product->regular_price * $cart->quantity;
+                    $cart->price=$product->regular_price;
                 }
 
                     $cart->save();
@@ -122,14 +122,13 @@ public function add_to_cart($id, Request $request)
 
     $userid = Auth::id();
 
-    
     $product_exist = Cart::where('product_id', $wishlistItem->product_id)
                          ->where('user_id', $userid)
                          ->first();
 
     if ($product_exist) {
-
         $product_exist->quantity += $request->input('quantity');
+        
         if ($wishlistItem->sale_price !== null) {
             $product_exist->price = $wishlistItem->sale_price * $product_exist->quantity;
         } else {
@@ -137,7 +136,6 @@ public function add_to_cart($id, Request $request)
         }
         $product_exist->save();
     } else {
-
         $cart = new Cart();
         $cart->product_id = $wishlistItem->product_id;
         $cart->slug = $wishlistItem->slug;
@@ -152,12 +150,12 @@ public function add_to_cart($id, Request $request)
         $cart->save();
     }
 
-    
     $wishlistItem->delete();
 
     Alert::success('Product added to cart successfully');
     return redirect()->back()->with('success', 'Product added to cart successfully');
 }
+
 
 public function remove_wishlist($id)
 {

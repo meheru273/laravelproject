@@ -205,4 +205,9 @@ public function stripePost(Request $request,$totalprice)
           
     return back();
 }
+
+public function submit()
+{
+    
+}
 }
