@@ -66,14 +66,15 @@
                                     <h2>{{$cart->price}}</h2>
                                 </td>
                                 <form action="{{ route('add_to_cart', $cart->id) }}" method="POST">
-                                @csrf
-                                <td>
-                                    <input type="number" name="quantity" value="1" min="1" style="width: 100px; height:40px; margin-bottom: 20px;">
-                                </td>
-                                <td>
-                                    <button type="submit" class="btn btn-solid-default">Add To Cart</button>
-                                </td>
-                            </form>
+                                    @csrf
+                                    <td>
+                                        <input type="number" name="quantity" value="1" min="1" style="width: 100px; height:40px; margin-bottom: 20px;">
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-solid-default">Add To Cart</button>
+                                    </td>
+                                </form>
+
 
                                 <td>
                                     <a href="{{route('remove_wishlist',$cart->id)}}" 

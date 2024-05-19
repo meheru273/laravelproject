@@ -206,8 +206,11 @@ public function stripePost(Request $request,$totalprice)
     return back();
 }
 
-public function submit()
+public function search_price(Request $request)
 {
-    
+    \Log::info('Slider values received:', [$request->left_value, $request->right_value]);
+    $products = Product::whereBetween('price', [$request->left_value, $request->right_value])->get();
+    return view('slider_search', compact('products'))->render();
 }
+
 }

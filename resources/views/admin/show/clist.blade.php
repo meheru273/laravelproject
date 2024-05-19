@@ -20,7 +20,6 @@
         <div class="col-md-20">
 
 
-                    <h3 class="text-black">Create Product</h3>
                 
                 <div class="container">
                     <div class="row d-flex justify-content-center">
@@ -34,7 +33,7 @@
                     <div class="col-md-20">
                         
                             <div class="card-header bg-dark">
-                                <h3 class="text-white">Products</h3>
+                                <h3 class="text-white">Category</h3>
                             </div>
                             <div class="container">
                                 <table class="table table-striped table-bordered">

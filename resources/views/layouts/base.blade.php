@@ -171,19 +171,9 @@
                                     </div>
                                 </div>
                             </nav>
-                            <div class="menu-right">
+                            <div class="menu-right" id="search_bar">
                                 <ul>
-                                <li class="onhover-dropdown wislist-dropdown">
-                                        <div class="cart-media">
-
-                                        </div>
-                                    </li>
-                                    <li class="onhover-dropdown wislist-dropdown">
-                                        <div class="cart-media">
-
-                                        </div>
-                                    </li>
-
+                                
                                     <li>
                                     <form action="{{route('product_search')}}" method="get" 
                                     style="display: flex; align-items: center;">

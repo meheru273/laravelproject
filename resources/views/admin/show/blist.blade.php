@@ -3,10 +3,10 @@
 <div class="main-panel">
 
 <div class="card-header">
-<div class="bg-dark py-3" >
+<div class="bg-dark py-2" >
     <h3 class="text-white text-center">Admin Panel</h3>
 </div>
-<div class="bg-dark py-3">
+<div class="bg-dark py-2">
     <h3 class="text-white text-center">Brand</h3>
 </div>
         
@@ -20,7 +20,7 @@
         <div class="col-md-20">
             
                 
-                    <h3 class="text-black">Create Product</h3>
+                    
                 
                 <div class="container">
                     <div class="row d-flex justify-content-center">
@@ -34,7 +34,7 @@
                     <div class="col-md-30">
                         
                             <div class="card-header bg-dark">
-                                <h3 class="text-white">Products</h3>
+                                <h3 class="text-white">Brands</h3>
                             </div>
                             <div class="card-body">
                                 <table class="table">

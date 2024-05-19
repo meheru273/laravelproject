@@ -229,6 +229,49 @@
                                     </ul>
                                 </div>
                             </div>
+                            <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add to Cart form
+        document.getElementById('addCartForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let form = this;
+            let formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Handle the response data
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Add to Wishlist form
+        document.getElementById('addWishlistForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let form = this;
+            let formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Handle the response data
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+</script>
                             <div class="product-details">
                                 <div class="rating-details">
                                     <span class="font-light grid-content">{{$product->category->name}}</span>

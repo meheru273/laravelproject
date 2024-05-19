@@ -43,7 +43,7 @@ class WishlistController extends Controller
 
             $cart->quantity=$quantity+$request->quantity;
 
-                if($product->sale_price !==null)
+                if($product->sale_price >0)
                 {
                     $cart->price=$product->sale_price;
                 }
@@ -66,11 +66,11 @@ class WishlistController extends Controller
 
          if($product->sale_price !==null)
          {
-            $cart->price=$product->sale_price * $request->quantity;
+            $cart->price=$product->sale_price ;
          }
          else
          {
-            $cart->price=$product->regular_price * $request->quantity;
+            $cart->price=$product->regular_price ;
          }
          
          $cart->image=$product->image;
@@ -110,6 +110,8 @@ public function show_wishlist()
 
 public function add_to_cart($id, Request $request)
 {
+   
+
     if (!Auth::check()) {
         Alert::error('You need to log in first');
         return redirect('login');
@@ -117,6 +119,7 @@ public function add_to_cart($id, Request $request)
 
     $wishlistItem = Wishlist::find($id);
     if (!$wishlistItem) {
+        Log::info('Wishlist item not found'); // Add this line for debugging
         return back()->with('error', 'Wishlist item not found.');
     }
 

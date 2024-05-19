@@ -1,7 +1,10 @@
 @extends('layouts.base')
 @push('styles')
 <link id="color-link" rel="stylesheet" type="text/css" href="{{asset('assets/css/demo2.css')}}">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
+integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <style>
         nav svg{
             height: 20px;
@@ -25,7 +28,10 @@
                 max-width: 400px;
             }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" 
+    integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
 @endpush
 
 @section('content')
@@ -83,7 +89,8 @@
                                     aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="range-slider category-list">
-                                            <input type="text" class="js-range-slider" id="js-range-price" value="">
+                                           
+                                            <input type="range" class="js-range-slider" id="input_right" max="100" value="100">
                                         </div>
                                     </div>
                                 </div>
@@ -326,7 +333,49 @@
                 
             </div>
 
+            <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add to Cart form
+        document.getElementById('addCartForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let form = this;
+            let formData = new FormData(form);
 
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Handle the response data
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Add to Wishlist form
+        document.getElementById('addWishlistForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let form = this;
+            let formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Handle the response data
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+</script>
 
             
         </div>
@@ -463,6 +512,21 @@
     window.addEventListener("beforeunload", function (e) {
         sessionStorage.setItem('scrollpos', window.scrollY);
     });
+
+    $(document).ready(function(e){
+           $('.range_slider').on('change',function(){
+               let left_value = $('#input_left').val();
+               let right_value = $('#input_right').val();
+               // alert(left_value+right_value);
+               $.ajax({
+                   url:"{{ route('search_price') }}",
+                   method:"GET",
+                   data:{left_value:left_value, right_value:right_value},
+                   success:function(res){
+                      $('.slider_search').html(res);
+                   }
+               });
+           });
     
 </script>
 
